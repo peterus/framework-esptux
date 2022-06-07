@@ -102,7 +102,7 @@ void HardwareSPI::transfer(void *buf, size_t count) {
       "spi general transfer"); // I don't think anyone is using this yet
   assert(spiChip);
   // assert(0);
-  // spiChip->transfer(buf, buf, count);
+  spiChip->transfer(buf, buf, count);
 }
 
 // Transaction Functions
