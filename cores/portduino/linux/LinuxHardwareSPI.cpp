@@ -89,7 +89,7 @@ uint8_t HardwareSPI::transfer(uint8_t data) {
 
 uint16_t HardwareSPI::transfer16(uint16_t data) {
   notImplemented("transfer16");
-  assert(0); // make fatal for now to prevent accidental use
+  // assert(0); // make fatal for now to prevent accidental use
   return 0x4242;
 }
 
@@ -101,7 +101,7 @@ void HardwareSPI::transfer(void *buf, size_t count) {
   notImplemented(
       "spi general transfer"); // I don't think anyone is using this yet
   assert(spiChip);
-  assert(0);
+  // assert(0);
   // spiChip->transfer(buf, buf, count);
 }
 
