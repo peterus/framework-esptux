@@ -11,7 +11,8 @@
 namespace arduino {
 
 // result codes for endTransmission per Arduino docs
-enum ResultI2c {
+enum ResultI2c
+{
   I2cSuccess = 0,
   I2cTooLong,
   I2cAddrNAK,
@@ -21,13 +22,21 @@ enum ResultI2c {
 
 class SimHardwareI2C : public HardwareI2C {
 public:
-  virtual void begin() NOT_IMPLEMENTED("i2cbegin");
+  virtual void begin() {
+    notImplemented("i2cbegin");
+  }
 
-  virtual void begin(uint8_t address) NOT_IMPLEMENTED("i2cslave begin");
+  virtual void begin(uint8_t address) {
+    notImplemented("i2cslave begin");
+  }
 
-  virtual void end() NOT_IMPLEMENTED("i2cend");
+  virtual void end() {
+    notImplemented("i2cend");
+  }
 
-  virtual void setClock(uint32_t freq) NOT_IMPLEMENTED("i2csetClock");
+  virtual void setClock(uint32_t freq) {
+    notImplemented("i2csetClock");
+  }
 
   virtual void beginTransmission(uint8_t address) {
     // FIXME - implement
@@ -38,7 +47,9 @@ public:
     return I2cAddrNAK; // Claim everyone naks
   }
 
-  virtual uint8_t endTransmission(void) { return endTransmission(true); }
+  virtual uint8_t endTransmission(void) {
+    return endTransmission(true);
+  }
 
   virtual uint8_t requestFrom(uint8_t address, size_t len, bool stopBit) {
     notImplemented("requestFrom");
@@ -50,9 +61,13 @@ public:
     return 0;
   }
 
-  virtual void onReceive(void (*)(int)) NOT_IMPLEMENTED("onReceive");
+  virtual void onReceive(void (*)(int)) {
+    notImplemented("onReceive");
+  }
 
-  virtual void onRequest(void (*)(void)) NOT_IMPLEMENTED("onRequest");
+  virtual void onRequest(void (*)(void)) {
+    notImplemented("onRequest");
+  }
 
   // Methods from Print
 

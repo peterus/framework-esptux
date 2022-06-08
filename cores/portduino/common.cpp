@@ -31,9 +31,9 @@ void randomSeed(unsigned long s) {
 }
 
 void tone(uint8_t _pin, unsigned int frequency, unsigned long duration) {
-  NOT_IMPLEMENTED("tone");
+  notImplemented("tone");
 }
 
 void noTone(uint8_t _pin) {
-  NOT_IMPLEMENTED("noTone");
+  notImplemented("noTone");
 }
