@@ -24,7 +24,7 @@ uint16_t HardwareSPI::transfer16(uint16_t data) {
 void HardwareSPI::transfer(void *buf, size_t count) {
   notImplemented("spi general transfer");
   assert(spiChip);
-  spiChip->transfer(buf, buf, count);
+  // spiChip->transfer(buf, buf, count);
 }
 
 void HardwareSPI::usingInterrupt(int interruptNumber) {
