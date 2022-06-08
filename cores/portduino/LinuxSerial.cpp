@@ -5,6 +5,9 @@
 namespace arduino {
 LinuxSerial Serial;
 
+void LinuxSerial::begin(unsigned long baudrate) {
+  begin(baudrate, SERIAL_8N1);
+}
 void LinuxSerial::begin(unsigned long baudrate, uint16_t config) {
 }
 

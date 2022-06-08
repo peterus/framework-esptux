@@ -6,15 +6,16 @@
 namespace arduino {
 class LinuxSerial : public HardwareSerial {
 public:
-  virtual void   begin(unsigned long baudrate, uint16_t config = SERIAL_8N1);
-  virtual void   end();
-  virtual int    available(void);
-  virtual int    peek(void);
-  virtual int    read(void);
-  virtual void   flush(void);
-  virtual size_t write(uint8_t);
+  virtual void   begin(unsigned long baudrate) final;
+  virtual void   begin(unsigned long baudrate, uint16_t config) final;
+  virtual void   end() final;
+  virtual int    available(void) final;
+  virtual int    peek(void) final;
+  virtual int    read(void) final;
+  virtual void   flush(void) final;
+  virtual size_t write(uint8_t) final;
   using Print::write;
-  virtual operator bool();
+  virtual operator bool() final;
 };
 
 extern LinuxSerial Serial;
