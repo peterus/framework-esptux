@@ -1,64 +1,35 @@
-cmake_minimum_required(VERSION 3.17)
-project(Portduino)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.16.3)
+PROJECT(Portduino)
 
-set(CMAKE_CXX_STANDARD 14)
+SET(CMAKE_CXX_STANDARD 20)
 
-include_directories(cores/arduino/api)
-include_directories(cores/portduino)
-include_directories(cores/portduino/FS)
+INCLUDE_DIRECTORIES(cores/arduino/api)
+INCLUDE_DIRECTORIES(cores/portduino)
+INCLUDE_DIRECTORIES(cores/portduino/FS)
 
-add_executable(Portduino
-        cores/arduino/api/deprecated/Client.h
-        cores/arduino/api/deprecated/HardwareSerial.h
-        cores/arduino/api/deprecated/IPAddress.h
-        cores/arduino/api/deprecated/Print.h
-        cores/arduino/api/deprecated/Printable.h
-        cores/arduino/api/deprecated/Server.h
-        cores/arduino/api/deprecated/Stream.h
-        cores/arduino/api/deprecated/Udp.h
-        cores/arduino/api/deprecated/WString.h
-        cores/arduino/api/deprecated-avr-comp/avr/dtostrf.h
-        cores/arduino/api/deprecated-avr-comp/avr/interrupt.h
-        cores/arduino/api/deprecated-avr-comp/avr/pgmspace.h
-        cores/arduino/api/ArduinoAPI.h
-        cores/arduino/api/Binary.h
-        cores/arduino/api/Client.h
+ADD_LIBRARY(Portduino
         cores/arduino/api/Common.cpp
-        cores/arduino/api/Common.h
-        cores/arduino/api/Compat.h
-        cores/arduino/api/HardwareI2C.h
-        cores/arduino/api/HardwareSerial.h
-        cores/arduino/api/HardwareSPI.h
-        cores/arduino/api/Interrupts.h
         cores/arduino/api/IPAddress.cpp
-        cores/arduino/api/IPAddress.h
-        cores/arduino/api/itoa.h
-        # cores/arduino/api/PluggableUSB.cpp
-        # cores/arduino/api/PluggableUSB.h
         cores/arduino/api/Print.cpp
-        cores/arduino/api/Print.h
-        cores/arduino/api/Printable.h
-        cores/arduino/api/RingBuffer.h
-        cores/arduino/api/Server.h
         cores/arduino/api/Stream.cpp
-        cores/arduino/api/Stream.h
         cores/arduino/api/String.cpp
-        cores/arduino/api/String.h
-        cores/arduino/api/Udp.h
-        cores/arduino/api/USBAPI.h
-        cores/arduino/api/WCharacter.h
-        cores/portduino/Arduino.h
-        cores/portduino/itoa.cpp
+
+        cores/portduino/FS/FS.cpp
+        cores/portduino/FS/PortduinoFS.cpp
+        cores/portduino/FS/vfs_api.cpp
+
+        cores/portduino/common.cpp
         cores/portduino/dtostrf.c
+        cores/portduino/itoa.cpp
+        cores/portduino/LinuxHardwareSPI.cpp
+        cores/portduino/LinuxSerial.cpp
+        cores/portduino/logging.cpp
         cores/portduino/main.cpp
-        cores/portduino/linux/millis.cpp
-        cores/portduino/simulated/SimCommon.cpp
-        cores/portduino/Utility.cpp
-        cores/portduino/Utility.h
-        cores/portduino/simulated/SimHardwareSPI.cpp
-        example/test.cpp
-       	cores/portduino/simulated/SimHardwareI2C.cpp
-       	cores/portduino/simulated/SimHardwareI2C.h
-       	cores/portduino/linux/LinuxCommon.cpp
-       	cores/portduino/linux/LinuxSerial.cpp
-       	cores/portduino/linux/LinuxSerial.h)
+        cores/portduino/millis.cpp
+        cores/portduino/PortduinoGPIO.cpp
+        cores/portduino/PortduinoPrint.cpp
+        cores/portduino/SimHardwareI2C.cpp
+        cores/portduino/Utility.cpp)
+
+ADD_EXECUTABLE(example example/test.cpp)
+TARGET_LINK_LIBRARIES(example Portduino)
