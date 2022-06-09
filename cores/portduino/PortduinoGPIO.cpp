@@ -1,11 +1,11 @@
-#include "PortduinoGPIO.h"
-#include "Arduino.h"
-#include "Common.h"
-#include "Utility.h"
-#include "logging.h"
-
 #include <assert.h>
 #include <stdlib.h>
+
+#include "Arduino.h"
+#include "Common.h"
+#include "PortduinoGPIO.h"
+#include "Utility.h"
+#include "logging.h"
 
 #define NUM_GPIOS 64
 

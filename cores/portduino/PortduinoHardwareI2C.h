@@ -1,5 +1,5 @@
-#ifndef PORTDUINO_SIMHARDWAREI2C_H
-#define PORTDUINO_SIMHARDWAREI2C_H
+#ifndef PORTDUINO_HARDWAREI2C_H_
+#define PORTDUINO_HARDWAREI2C_H_
 
 #include "HardwareI2C.h"
 #include "Utility.h"
@@ -98,4 +98,4 @@ public:
 extern SimHardwareI2C Wire;
 } // namespace arduino
 
-#endif // PORTDUINO_SIMHARDWAREI2C_H
+#endif

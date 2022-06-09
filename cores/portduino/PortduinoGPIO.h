@@ -1,12 +1,13 @@
-#pragma once
+#ifndef PORTDUINO_GPIO_H_
+#define PORTDUINO_GPIO_H_
+
+#include <assert.h>
+#include <stdlib.h>
 
 #include "Arduino.h"
 #include "Common.h"
 #include "Utility.h"
 #include "logging.h"
-
-#include <assert.h>
-#include <stdlib.h>
 
 class GPIOPinIf {
 public:
@@ -172,3 +173,5 @@ void gpioIdle();
 
 /// Assign an implementation to a specific pin
 void gpioBind(GPIOPinIf *p);
+
+#endif

@@ -1,7 +1,7 @@
-#include "Utility.h"
-#include <Print.h>
-
 #include <cstdarg>
+
+#include "Print.h"
+#include "Utility.h"
 
 #define MAX_STR_LEN 256
 
@@ -12,4 +12,5 @@ size_t Print::printf(const char *format, ...) {
   vsnprintf(buf, sizeof(buf), format, args);
   write(buf);
   va_end(args);
+  return sizeof(buf);
 }

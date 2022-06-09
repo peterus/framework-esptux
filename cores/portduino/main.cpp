@@ -1,8 +1,9 @@
+#include <argp.h>
+#include <stdio.h>
+
 #include "Arduino.h"
 #include "PortduinoFS.h"
 #include "PortduinoGPIO.h"
-#include <argp.h>
-#include <stdio.h>
 
 /** # msecs to sleep each loop invocation.  FIXME - make this controlable via
  * config file or command line flags.
@@ -17,29 +18,28 @@ void __attribute__((weak)) portduinoSetup() {
   printf("No portduinoSetup() found, using default settings...\n");
 }
 
-void __attribute__((weak)) portduinoCustomInit() {}
+void __attribute__((weak)) portduinoCustomInit() {
+}
 
 // FIXME - move into app client (out of lib) and use real name and version
 // FIXME - add app specific options as child options
 // http://www.gnu.org/software/libc/manual/html_node/Argp.html
-const char *argp_program_version = "portduino 0.1.0";
-const char *argp_program_bug_address =
-    "https://github.com/meshtastic/Meshtastic-device";
-static char doc[] = "An application written with porduino";
-static char args_doc[] = "...";
+const char *argp_program_version     = "portduino 0.1.0";
+const char *argp_program_bug_address = "https://github.com/meshtastic/Meshtastic-device";
+static char doc[]                    = "An application written with porduino";
+static char args_doc[]               = "...";
 
 static struct argp_option options[] = {
     // FIXME not yet implemented
     // {"erase", 'e', 0, 0, "Erase virtual filesystem before use"},
 
     {"fsdir", 'd', "DIR", 0, "The directory to use as the virtual filesystem"},
-    {"hwid", 'h', "HWID", 0,
-     "The mac address to assign to this virtual machine"},
+    {"hwid", 'h', "HWID", 0, "The mac address to assign to this virtual machine"},
     {0}};
 
 struct TopArguments {
-  bool erase;
-  char *fsDir;
+  bool     erase;
+  char *   fsDir;
   uint32_t hwId;
 };
 
@@ -90,10 +90,9 @@ static struct argp argp = {options, parse_opt, args_doc, doc, children, 0, 0};
  * call from portuinoCustomInit() if you want to add custom command line
  * arguments
  */
-void portduinoAddArguments(const struct argp_child &child,
-                           void *_childArguments) {
+void portduinoAddArguments(const struct argp_child &child, void *_childArguments) {
   // We only support one child for now
-  children[0] = child;
+  children[0]    = child;
   childArguments = _childArguments;
 }
 
@@ -123,8 +122,7 @@ int main(int argc, char *argv[]) {
     } else
       fsRoot += args->fsDir;
 
-    printf("Portduino is starting, HWID=%d, VFS root at %s\n", args->hwId,
-           fsRoot.c_str());
+    printf("Portduino is starting, HWID=%d, VFS root at %s\n", args->hwId, fsRoot.c_str());
 
     mkdir(fsRoot.c_str(), 0700);
 

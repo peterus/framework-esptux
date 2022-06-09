@@ -1,5 +1,5 @@
-#ifndef PORTDUINO_UTILITY_H
-#define PORTDUINO_UTILITY_H
+#ifndef UTILITY_H_
+#define UTILITY_H_
 
 #include <stdexcept>
 #include <string>
@@ -19,4 +19,4 @@ int portduinoCheckZero(int result, const char *msg, ...);
 
 void portduinoDebug();
 
-#endif // PORTDUINO_UTILITY_H
+#endif

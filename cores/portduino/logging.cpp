@@ -1,7 +1,7 @@
-#include "logging.h"
-#include "Utility.h"
-
 #include <Arduino.h>
+
+#include "Utility.h"
+#include "logging.h"
 
 namespace arduino {
 
@@ -54,4 +54,4 @@ void log_v(const char *fmt, ...) {
   va_end(args);
 }
 
-}
+} // namespace arduino
