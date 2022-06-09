@@ -18,17 +18,16 @@ ADD_LIBRARY(Portduino
         cores/portduino/FS/PortduinoFS.cpp
         cores/portduino/FS/vfs_api.cpp
 
-        cores/portduino/common.cpp
+        cores/portduino/Common.cpp
         cores/portduino/dtostrf.c
         cores/portduino/itoa.cpp
-        cores/portduino/LinuxHardwareSPI.cpp
-        cores/portduino/LinuxSerial.cpp
         cores/portduino/logging.cpp
         cores/portduino/main.cpp
-        cores/portduino/millis.cpp
         cores/portduino/PortduinoGPIO.cpp
+        cores/portduino/PortduinoHardwareI2C.cpp
+        cores/portduino/PortduinoHardwareSerial.cpp
+        cores/portduino/PortduinoHardwareSPI.cpp
         cores/portduino/PortduinoPrint.cpp
-        cores/portduino/SimHardwareI2C.cpp
         cores/portduino/Utility.cpp)
 
 ADD_EXECUTABLE(example example/test.cpp)

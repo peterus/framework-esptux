@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "LinuxSerial.h"
+#include "PortduinoHardwareSerial.h"
 
 namespace arduino {
 LinuxSerial Serial;

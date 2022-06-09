@@ -1,5 +1,5 @@
-#ifndef PORTDUINO_LINUXSERIAL_H
-#define PORTDUINO_LINUXSERIAL_H
+#ifndef HARDWARE_SERIAL_H_
+#define HARDWARE_SERIAL_H_
 
 #include "HardwareSerial.h"
 

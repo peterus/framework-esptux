@@ -5,8 +5,8 @@
 
 #include "ArduinoAPI.h"
 #include "HardwareSPI.h"
-#include "LinuxSerial.h"
-#include "SimHardwareI2C.h"
+#include "PortduinoHardwareI2C.h"
+#include "PortduinoHardwareSerial.h"
 
 extern HardwareSPI SPI;
 

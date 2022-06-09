@@ -1,7 +1,3 @@
-//
-// Created by kevinh on 9/1/20.
-//
-
 #ifndef PORTDUINO_SIMHARDWAREI2C_H
 #define PORTDUINO_SIMHARDWAREI2C_H
 
