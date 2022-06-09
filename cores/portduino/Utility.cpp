@@ -29,6 +29,5 @@ int portduinoCheckZero(int result, const char *msg, ...) {
 }
 
 void portduinoDebug() {
-  // Generate an interrupt
   std::raise(SIGINT);
 }

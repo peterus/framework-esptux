@@ -4,6 +4,7 @@
 #include "HardwareSerial.h"
 
 namespace arduino {
+
 class LinuxSerial : public HardwareSerial {
 public:
   virtual void   begin(unsigned long baudrate) final;
@@ -19,6 +20,7 @@ public:
 };
 
 extern LinuxSerial Serial;
+
 } // namespace arduino
 
 #endif

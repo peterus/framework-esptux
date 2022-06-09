@@ -37,4 +37,5 @@ size_t LinuxSerial::write(uint8_t c) {
 LinuxSerial::operator bool() {
   return true;
 }
+
 } // namespace arduino

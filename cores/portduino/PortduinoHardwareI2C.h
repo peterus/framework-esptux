@@ -6,7 +6,6 @@
 
 namespace arduino {
 
-// result codes for endTransmission per Arduino docs
 enum ResultI2c
 {
   I2cSuccess = 0,
@@ -65,8 +64,6 @@ public:
     notImplemented("onRequest");
   }
 
-  // Methods from Print
-
   virtual size_t write(uint8_t) {
     notImplemented("writei2c");
     return 0;
@@ -76,8 +73,6 @@ public:
     notImplemented("writeNi2c");
     return 0;
   }
-
-  // Methods from Stream
 
   virtual int available() {
     notImplemented("i2cavailable");
@@ -96,6 +91,7 @@ public:
 };
 
 extern SimHardwareI2C Wire;
+
 } // namespace arduino
 
 #endif
