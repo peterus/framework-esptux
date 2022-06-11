@@ -7,6 +7,8 @@ INCLUDE_DIRECTORIES(cores/arduino/api)
 INCLUDE_DIRECTORIES(cores/portduino)
 INCLUDE_DIRECTORIES(cores/portduino/FS)
 
+ADD_DEFINITIONS(-DHOST)
+
 ADD_LIBRARY(Portduino
         cores/arduino/api/Common.cpp
         cores/arduino/api/IPAddress.cpp
@@ -18,11 +20,11 @@ ADD_LIBRARY(Portduino
         cores/portduino/FS/PortduinoFS.cpp
         cores/portduino/FS/vfs_api.cpp
 
+        cores/portduino/Arduino.cpp
         cores/portduino/Common.cpp
         cores/portduino/dtostrf.c
         cores/portduino/itoa.cpp
         cores/portduino/logging.cpp
-        cores/portduino/main.cpp
         cores/portduino/PortduinoGPIO.cpp
         cores/portduino/PortduinoHardwareI2C.cpp
         cores/portduino/PortduinoHardwareSerial.cpp

@@ -1,6 +1,6 @@
 #include <assert.h>
 
-#include "HardwareSPI.h"
+#include "PortduinoHardwareSPI.h"
 #include "SPIChip.h"
 #include "Utility.h"
 #include "logging.h"
@@ -9,58 +9,58 @@ SPIChip *spiChip;
 
 namespace arduino {
 
-uint8_t HardwareSPI::transfer(uint8_t data) {
+uint8_t SimHardwareSPI::transfer(uint8_t data) {
   uint8_t response;
   assert(spiChip);
   spiChip->transfer(&data, &response, 1, false);
   return response;
 }
 
-uint16_t HardwareSPI::transfer16(uint16_t data) {
+uint16_t SimHardwareSPI::transfer16(uint16_t data) {
   notImplemented("transfer16");
   return 0x4242;
 }
 
-void HardwareSPI::transfer(void *buf, size_t count) {
+void SimHardwareSPI::transfer(void *buf, size_t count) {
   notImplemented("spi general transfer");
   assert(spiChip);
   // spiChip->transfer(buf, buf, count);
 }
 
-void HardwareSPI::usingInterrupt(int interruptNumber) {
+void SimHardwareSPI::usingInterrupt(int interruptNumber) {
 }
 
-void HardwareSPI::notUsingInterrupt(int interruptNumber) {
+void SimHardwareSPI::notUsingInterrupt(int interruptNumber) {
 }
 
-void HardwareSPI::beginTransaction(SPISettings settings) {
-  assert(settings.bitOrder == MSBFIRST);
-  assert(settings.dataMode == SPI_MODE0);
+void SimHardwareSPI::beginTransaction(SPISettings settings) {
+  assert(settings.getBitOrder() == MSBFIRST);
+  assert(settings.getDataMode() == SPI_MODE0);
 }
 
-void HardwareSPI::endTransaction(void) {
+void SimHardwareSPI::endTransaction(void) {
   assert(spiChip);
 }
 
-void HardwareSPI::attachInterrupt() {
+void SimHardwareSPI::attachInterrupt() {
 }
 
-void HardwareSPI::detachInterrupt() {
+void SimHardwareSPI::detachInterrupt() {
 }
 
-void HardwareSPI::begin() {
+void SimHardwareSPI::begin() {
   if (!spiChip) {
     spiChip = new SimSPIChip();
   }
 }
 
-void HardwareSPI::end() {
+void SimHardwareSPI::end() {
   if (spiChip) {
     delete spiChip;
     spiChip = NULL;
   }
 }
 
-} // namespace arduino
+SimHardwareSPI SPI;
 
-HardwareSPI SPI;
+} // namespace arduino

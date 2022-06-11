@@ -1,3 +1,6 @@
+#ifndef SPI_CHIP_H_
+#define SPI_CHIP_H_
+
 #include "HardwareSPI.h"
 
 class SPIChip {
@@ -41,3 +44,5 @@ public:
 
 // FIXME, this is kinda skanky, but for now we assume one SPI device
 extern SPIChip *spiChip;
+
+#endif
