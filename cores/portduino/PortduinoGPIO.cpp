@@ -72,3 +72,7 @@ void detachInterrupt(pin_size_t interruptNumber) {
   auto p = getGPIO(interruptNumber);
   p->detachInterrupt();
 }
+
+pin_size_t digitalPinToInterrupt(pin_size_t pinNumber) {
+  return pinNumber;
+}

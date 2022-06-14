@@ -10,8 +10,6 @@
 
 using namespace arduino;
 
-pin_size_t digitalPinToInterrupt(pin_size_t pinNumber);
-
 extern void portduinoSetup();
 
 extern void portduinoCustomInit();

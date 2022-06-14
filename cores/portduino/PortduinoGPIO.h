@@ -174,4 +174,6 @@ void gpioIdle();
 /// Assign an implementation to a specific pin
 void gpioBind(GPIOPinIf *p);
 
+pin_size_t digitalPinToInterrupt(pin_size_t pinNumber);
+
 #endif
