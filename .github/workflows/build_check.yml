@@ -26,7 +26,8 @@ jobs:
     strategy:
       matrix:
         path:
-          - 'cores/portduino'
+          - check: 'cores/portduino'
+            exclude: 'FS'
           - 'example'
     steps:
       - name: Checkout code
@@ -34,7 +35,7 @@ jobs:
         with:
           submodules: true
       - name: Run clang-format style check for C/C++ programs.
-        uses: jidicula/clang-format-action@v4.5.0
+        uses: jidicula/clang-format-action@v4.6.2
         with:
           clang-format-version: '11'
           check-path: ${{ matrix.path }}
