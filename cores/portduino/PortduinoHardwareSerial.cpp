@@ -3,38 +3,39 @@
 #include "PortduinoHardwareSerial.h"
 
 namespace arduino {
-LinuxSerial Serial;
+PortduinoSerial Serial;
 
-void LinuxSerial::begin(unsigned long baudrate) {
+void PortduinoSerial::begin(unsigned long baudrate) {
   begin(baudrate, SERIAL_8N1);
 }
-void LinuxSerial::begin(unsigned long baudrate, uint16_t config) {
+
+void PortduinoSerial::begin(unsigned long baudrate, uint16_t config) {
 }
 
-void LinuxSerial::end() {
+void PortduinoSerial::end() {
 }
 
-int LinuxSerial::available(void) {
+int PortduinoSerial::available(void) {
   return 0;
 }
 
-int LinuxSerial::peek(void) {
+int PortduinoSerial::peek(void) {
   return -1;
 }
 
-int LinuxSerial::read(void) {
+int PortduinoSerial::read(void) {
   return -1;
 }
 
-void LinuxSerial::flush(void) {
+void PortduinoSerial::flush(void) {
 }
 
-size_t LinuxSerial::write(uint8_t c) {
+size_t PortduinoSerial::write(uint8_t c) {
   putchar(c);
   return 1;
 }
 
-LinuxSerial::operator bool() {
+PortduinoSerial::operator bool() {
   return true;
 }
 

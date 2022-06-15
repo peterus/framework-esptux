@@ -5,7 +5,7 @@
 
 namespace arduino {
 
-class LinuxSerial : public HardwareSerial {
+class PortduinoSerial : public HardwareSerial {
 public:
   virtual void   begin(unsigned long baudrate) final;
   virtual void   begin(unsigned long baudrate, uint16_t config) final;
@@ -19,7 +19,7 @@ public:
   virtual operator bool() final;
 };
 
-extern LinuxSerial Serial;
+extern PortduinoSerial Serial;
 
 } // namespace arduino
 
