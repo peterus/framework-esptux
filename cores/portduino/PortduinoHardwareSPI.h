@@ -10,27 +10,27 @@
 
 namespace arduino {
 
-class SimHardwareSPI : public HardwareSPI {
+class PortduinoSPI : public HardwareSPI {
 public:
-  virtual uint8_t  transfer(uint8_t data);
-  virtual uint16_t transfer16(uint16_t data);
-  virtual void     transfer(void *buf, size_t count);
+  virtual uint8_t  transfer(uint8_t data) final;
+  virtual uint16_t transfer16(uint16_t data) final;
+  virtual void     transfer(void *buf, size_t count) final;
 
   // Transaction Functions
-  virtual void usingInterrupt(int interruptNumber);
-  virtual void notUsingInterrupt(int interruptNumber);
-  virtual void beginTransaction(SPISettings settings);
-  virtual void endTransaction(void);
+  virtual void usingInterrupt(int interruptNumber) final;
+  virtual void notUsingInterrupt(int interruptNumber) final;
+  virtual void beginTransaction(SPISettings settings) final;
+  virtual void endTransaction(void) final;
 
   // SPI Configuration methods
-  virtual void attachInterrupt();
-  virtual void detachInterrupt();
+  virtual void attachInterrupt() final;
+  virtual void detachInterrupt() final;
 
-  virtual void begin();
-  virtual void end();
+  virtual void begin() final;
+  virtual void end() final;
 };
 
-extern SimHardwareSPI SPI;
+extern PortduinoSPI SPI;
 
 } // namespace arduino
 
