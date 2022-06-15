@@ -12,8 +12,6 @@ public:
 
 void notImplemented(const char *msg);
 
-[[noreturn]] void portduinoError(const char *msg, ...);
-
 int portduinoCheckNotNeg(int result, const char *msg, ...);
 int portduinoCheckZero(int result, const char *msg, ...);
 
