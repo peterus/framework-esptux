@@ -15,82 +15,34 @@ enum ResultI2c
   I2cOtherError
 };
 
-class SimHardwareI2C : public HardwareI2C {
+class PortduinoI2C : public HardwareI2C {
 public:
-  virtual void begin() {
-    notImplemented("i2cbegin");
-  }
+  virtual void begin() final;
+  virtual void begin(uint8_t address) final;
 
-  virtual void begin(uint8_t address) {
-    notImplemented("i2cslave begin");
-  }
+  virtual void end() final;
 
-  virtual void end() {
-    notImplemented("i2cend");
-  }
+  virtual void setClock(uint32_t freq) final;
 
-  virtual void setClock(uint32_t freq) {
-    notImplemented("i2csetClock");
-  }
+  virtual void    beginTransmission(uint8_t address) final;
+  virtual uint8_t endTransmission(bool stopBit) final;
+  virtual uint8_t endTransmission(void) final;
 
-  virtual void beginTransmission(uint8_t address) {
-    // FIXME - implement
-  }
+  virtual size_t requestFrom(uint8_t address, size_t len, bool stopBit) final;
+  virtual size_t requestFrom(uint8_t address, size_t len) final;
 
-  virtual uint8_t endTransmission(bool stopBit) {
-    // notImplemented("i2cEndTransmission"); FIXME implement
-    return I2cAddrNAK; // Claim everyone naks
-  }
+  virtual void onReceive(void (*)(int)) final;
+  virtual void onRequest(void (*)(void)) final;
 
-  virtual uint8_t endTransmission(void) {
-    return endTransmission(true);
-  }
+  virtual size_t write(uint8_t) final;
+  virtual size_t write(const uint8_t *buffer, size_t size) final;
 
-  virtual size_t requestFrom(uint8_t address, size_t len, bool stopBit) {
-    notImplemented("requestFrom");
-    return 0;
-  }
-
-  virtual size_t requestFrom(uint8_t address, size_t len) {
-    notImplemented("requestFrom");
-    return 0;
-  }
-
-  virtual void onReceive(void (*)(int)) {
-    notImplemented("onReceive");
-  }
-
-  virtual void onRequest(void (*)(void)) {
-    notImplemented("onRequest");
-  }
-
-  virtual size_t write(uint8_t) {
-    notImplemented("writei2c");
-    return 0;
-  }
-
-  virtual size_t write(const uint8_t *buffer, size_t size) {
-    notImplemented("writeNi2c");
-    return 0;
-  }
-
-  virtual int available() {
-    notImplemented("i2cavailable");
-    return 0;
-  }
-
-  virtual int read() {
-    notImplemented("i2cread");
-    return -1;
-  }
-
-  virtual int peek() {
-    notImplemented("i2cpeek");
-    return -1;
-  }
+  virtual int available() final;
+  virtual int read() final;
+  virtual int peek() final;
 };
 
-extern SimHardwareI2C Wire;
+extern PortduinoI2C Wire;
 
 } // namespace arduino
 
