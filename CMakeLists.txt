@@ -9,6 +9,8 @@ INCLUDE_DIRECTORIES(cores/portduino/FS)
 
 ADD_DEFINITIONS(-DHOST)
 
+SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 ADD_LIBRARY(Portduino
         cores/arduino/api/Common.cpp
         cores/arduino/api/IPAddress.cpp
