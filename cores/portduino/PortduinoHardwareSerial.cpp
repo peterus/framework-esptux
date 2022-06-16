@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "PortduinoHardwareSerial.h"
+#include "Utility.h"
 
 namespace arduino {
 PortduinoSerial Serial;
@@ -10,6 +11,8 @@ void PortduinoSerial::begin(unsigned long baudrate) {
 }
 
 void PortduinoSerial::begin(unsigned long baudrate, uint16_t config) {
+  UNUSED(baudrate);
+  UNUSED(config);
 }
 
 void PortduinoSerial::end() {

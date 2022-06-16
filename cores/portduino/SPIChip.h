@@ -2,6 +2,7 @@
 #define SPI_CHIP_H_
 
 #include "HardwareSPI.h"
+#include "Utility.h"
 
 class SPIChip {
 public:
@@ -16,8 +17,11 @@ public:
   virtual int transfer(const uint8_t *outBuf, uint8_t *inBuf, size_t bufLen, bool deassertCS = true) = 0;
 
   /// is this chip controlling real hardware?
-  virtual const bool isSimulated() {
+  virtual bool isSimulated() {
     return false;
+  }
+
+  virtual ~SPIChip() {
   }
 };
 
@@ -32,13 +36,20 @@ public:
    * @return 0 for success, else ERRNO fault code
    */
   int transfer(const uint8_t *outBuf, uint8_t *inBuf, size_t bufLen, bool deassertCS = true) {
+    UNUSED(outBuf);
+    UNUSED(inBuf);
+    UNUSED(bufLen);
+    UNUSED(deassertCS);
     // log(SysSPI, LogVerbose, "SIM: spiTransfer(%d) -> %d", bufLen);
     return 0;
   }
 
   /// is this chip controlling real hardware?
-  virtual const bool isSimulated() {
+  virtual bool isSimulated() {
     return true;
+  }
+
+  virtual ~SimSPIChip() {
   }
 };
 

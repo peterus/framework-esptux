@@ -49,6 +49,7 @@ public:
   }
 
   void analogWrite(int v) {
+    UNUSED(v);
     notImplemented("gpio:refreshState");
   }
 

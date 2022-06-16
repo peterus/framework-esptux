@@ -52,9 +52,13 @@ void randomSeed(unsigned long s) {
 }
 
 void tone(uint8_t _pin, unsigned int frequency, unsigned long duration) {
+  UNUSED(_pin);
+  UNUSED(frequency);
+  UNUSED(duration);
   notImplemented("tone");
 }
 
 void noTone(uint8_t _pin) {
+  UNUSED(_pin);
   notImplemented("noTone");
 }

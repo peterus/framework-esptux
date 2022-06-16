@@ -7,6 +7,7 @@ void PortduinoI2C::begin() {
 }
 
 void PortduinoI2C::begin(uint8_t address) {
+  UNUSED(address);
   notImplemented("i2cslave begin");
 }
 
@@ -15,14 +16,17 @@ void PortduinoI2C::end() {
 }
 
 void PortduinoI2C::setClock(uint32_t freq) {
+  UNUSED(freq);
   notImplemented("i2csetClock");
 }
 
 void PortduinoI2C::beginTransmission(uint8_t address) {
+  UNUSED(address);
   // FIXME - implement
 }
 
 uint8_t PortduinoI2C::endTransmission(bool stopBit) {
+  UNUSED(stopBit);
   // notImplemented("i2cEndTransmission"); FIXME implement
   return I2cAddrNAK; // Claim everyone naks
 }
@@ -32,11 +36,16 @@ uint8_t PortduinoI2C::endTransmission(void) {
 }
 
 size_t PortduinoI2C::requestFrom(uint8_t address, size_t len, bool stopBit) {
+  UNUSED(address);
+  UNUSED(len);
+  UNUSED(stopBit);
   notImplemented("requestFrom");
   return 0;
 }
 
 size_t PortduinoI2C::requestFrom(uint8_t address, size_t len) {
+  UNUSED(address);
+  UNUSED(len);
   notImplemented("requestFrom");
   return 0;
 }
@@ -55,6 +64,8 @@ size_t PortduinoI2C::write(uint8_t) {
 }
 
 size_t PortduinoI2C::write(const uint8_t *buffer, size_t size) {
+  UNUSED(buffer);
+  UNUSED(size);
   notImplemented("writeNi2c");
   return 0;
 }

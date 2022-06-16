@@ -17,4 +17,6 @@ int portduinoCheckZero(int result, const char *msg, ...);
 
 void portduinoDebug();
 
+#define UNUSED(x) (void)(x)
+
 #endif

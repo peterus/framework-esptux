@@ -17,20 +17,25 @@ uint8_t PortduinoSPI::transfer(uint8_t data) {
 }
 
 uint16_t PortduinoSPI::transfer16(uint16_t data) {
+  UNUSED(data);
   notImplemented("transfer16");
   return 0x4242;
 }
 
 void PortduinoSPI::transfer(void *buf, size_t count) {
+  UNUSED(buf);
+  UNUSED(count);
   notImplemented("spi general transfer");
   assert(spiChip);
   // spiChip->transfer(buf, buf, count);
 }
 
 void PortduinoSPI::usingInterrupt(int interruptNumber) {
+  UNUSED(interruptNumber);
 }
 
 void PortduinoSPI::notUsingInterrupt(int interruptNumber) {
+  UNUSED(interruptNumber);
 }
 
 void PortduinoSPI::beginTransaction(SPISettings settings) {

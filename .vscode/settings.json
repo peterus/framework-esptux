@@ -12,5 +12,6 @@
         "memory_resource": "cpp",
         "algorithm": "cpp",
         "cmath": "cpp"
-    }
+    },
+    "clang-tidy.buildPath": "build"
 }
