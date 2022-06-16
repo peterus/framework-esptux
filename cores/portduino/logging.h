@@ -1,6 +1,8 @@
 #ifndef LOGGING_H_
 #define LOGGING_H_
 
+#include <cstdarg>
+
 namespace arduino {
 
 enum LogLevel
