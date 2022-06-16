@@ -1,18 +1,25 @@
 #ifndef PORTDUINO_HARDWAREI2C_H_
 #define PORTDUINO_HARDWAREI2C_H_
 
+#include <cstdint>
+#include <memory>
+
 #include "HardwareI2C.h"
 #include "Utility.h"
 
 namespace arduino {
 
-enum ResultI2c
-{
-  I2cSuccess = 0,
-  I2cTooLong,
-  I2cAddrNAK,
-  I2cDataNAK,
-  I2cOtherError
+class I2CDevice {
+public:
+  I2CDevice(uint8_t address);
+
+  uint8_t getAddress() const;
+
+  virtual size_t write(uint8_t data) = 0;
+  virtual int    read()              = 0;
+
+private:
+  const uint8_t _address;
 };
 
 class PortduinoI2C : public HardwareI2C {
@@ -40,9 +47,14 @@ public:
   virtual int available() final;
   virtual int read() final;
   virtual int peek() final;
+
+private:
+  std::shared_ptr<I2CDevice> _selectedDevice;
 };
 
 extern PortduinoI2C Wire;
+
+void addI2CDevice(std::shared_ptr<I2CDevice> device);
 
 } // namespace arduino
 
