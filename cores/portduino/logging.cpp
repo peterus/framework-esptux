@@ -1,56 +1,97 @@
-#include <Arduino.h>
+#include "Arduino.h"
 
 #include "Utility.h"
 #include "logging.h"
 
 namespace arduino {
 
-void log(LogSystem sys, LogLevel level, const char *fmt, ...) {
-  va_list args;
-  va_start(args, fmt);
-  logv(sys, level, fmt, args);
-  va_end(args);
+String getLogLevelText(const LogLevel level) {
+  switch (level) {
+  case LogVerbose:
+    return "V";
+  case LogDebug:
+    return "D";
+  case LogInfo:
+    return "I";
+  case LogWarn:
+    return "W";
+  case LogError:
+    return "E";
+  default:
+    return " ";
+  }
 }
 
-void logv(LogSystem sys, LogLevel level, const char *fmt, va_list args) {
-  char buf[256]; // FIXME - this takes up lots of stack space
+String getLogSystemText(const LogSystem system) {
+  switch (system) {
+  case SysCore:
+    return "CORE";
+  case SysGPIO:
+    return "GPIO";
+  case SysI2C:
+    return "I2C";
+  case SysSPI:
+    return "SPI";
+  case SysInterrupt:
+    return "INT";
+  case SysWifi:
+    return "WIFI";
+  default:
+    return "APP" + String(system - SysApp0);
+  }
+}
+
+void logv(const LogSystem system, const LogLevel level, const char *fmt, va_list args) {
+  char buf[256];
   vsnprintf(buf, sizeof(buf), fmt, args);
-  Serial.write(buf);
-  Serial.write('\n'); // FIXME make logging smarter
+  Serial.print("[");
+  Serial.print(getLogLevelText(level));
+  Serial.print("][");
+  Serial.print(getLogSystemText(system));
+  Serial.print("]");
+  Serial.print(buf);
+  Serial.println();
 }
 
-void log_e(const char *fmt, ...) {
+void log(const LogSystem system, const LogLevel level, const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
-  logv(SysCurrent, LogError, fmt, args);
+  logv(system, level, fmt, args);
   va_end(args);
 }
 
-void log_w(const char *fmt, ...) {
+void log_e(const LogSystem system, const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
-  logv(SysCurrent, LogWarn, fmt, args);
+  logv(system, LogError, fmt, args);
   va_end(args);
 }
 
-void log_i(const char *fmt, ...) {
+void log_w(const LogSystem system, const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
-  logv(SysCurrent, LogInfo, fmt, args);
+  logv(system, LogWarn, fmt, args);
   va_end(args);
 }
 
-void log_d(const char *fmt, ...) {
+void log_i(const LogSystem system, const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
-  logv(SysCurrent, LogDebug, fmt, args);
+  logv(system, LogInfo, fmt, args);
   va_end(args);
 }
 
-void log_v(const char *fmt, ...) {
+void log_d(const LogSystem system, const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
-  logv(SysCurrent, LogVerbose, fmt, args);
+  logv(system, LogDebug, fmt, args);
+  va_end(args);
+}
+
+void log_v(const LogSystem system, const char *fmt, ...) {
+  va_list args;
+  va_start(args, fmt);
+  logv(system, LogVerbose, fmt, args);
   va_end(args);
 }
 
