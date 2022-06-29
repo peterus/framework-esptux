@@ -4,15 +4,16 @@
 #include "Arduino.h"
 #include "PortduinoFS.h"
 #include "PortduinoGPIO.h"
+#include "logging.h"
 
 #define LOOPDELAY 100
 
 void __attribute__((weak)) portduinoSetup() {
-  printf("No portduinoSetup() found, using default function...\n");
+  log_i(SysCore, "No portduinoSetup() found, using default function...");
 }
 
 void __attribute__((weak)) portduinoCustomInit() {
-  printf("No portduinoCustomInit() found, using default function...\n");
+  log_i(SysCore, "No portduinoCustomInit() found, using default function...");
 }
 
 int main() {
@@ -21,8 +22,8 @@ int main() {
   fsRoot += "/default";
   mkdir(fsRoot.c_str(), 0700);
 
-  printf("Portduino is starting up\n");
-  printf("VFS root at %s\n", fsRoot.c_str());
+  log_i(SysCore, "Portduino is starting up");
+  log_i(SysCore, "VFS root at %s", fsRoot.c_str());
 
   portduinoVFS->mountpoint(fsRoot.c_str());
 

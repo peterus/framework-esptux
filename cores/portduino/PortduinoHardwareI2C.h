@@ -2,6 +2,7 @@
 #define PORTDUINO_HARDWAREI2C_H_
 
 #include <cstdint>
+#include <list>
 #include <memory>
 
 #include "HardwareI2C.h"
@@ -24,6 +25,8 @@ private:
 
 class PortduinoI2C : public HardwareI2C {
 public:
+  PortduinoI2C();
+
   virtual void begin() final;
   virtual void begin(uint8_t address) final;
 
@@ -48,13 +51,18 @@ public:
   virtual int read() final;
   virtual int peek() final;
 
+  // I2C sim handling functions - do not use in Arduino code!
+  void addI2CDevice(std::shared_ptr<I2CDevice> device);
+  void allowAddressNotFound(bool allow = true);
+
 private:
-  std::shared_ptr<I2CDevice> _selectedDevice;
+  bool _allowAddressNotFound;
+
+  std::shared_ptr<I2CDevice>            _selectedDevice;
+  std::list<std::shared_ptr<I2CDevice>> _devices;
 };
 
 extern PortduinoI2C Wire;
-
-void addI2CDevice(std::shared_ptr<I2CDevice> device);
 
 } // namespace arduino
 

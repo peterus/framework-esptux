@@ -2,14 +2,10 @@
 #include <stdio.h>
 
 #include "Utility.h"
+#include "logging.h"
 
 void notImplemented(const char *msg) {
-  printf("%s is not implemented\n", msg);
-}
-
-void portduinoError(const char *msg, ...) {
-  printf("Portduino critical error: %s\n", msg);
-  throw Exception(msg);
+  log_w(arduino::SysCore, "%s is not implemented", msg);
 }
 
 int portduinoCheckNotNeg(int result, const char *msg, ...) {

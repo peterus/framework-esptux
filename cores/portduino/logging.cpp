@@ -1,3 +1,6 @@
+#include <ostream>
+#include <sstream>
+
 #include "Arduino.h"
 
 #include "Utility.h"
@@ -41,57 +44,60 @@ String getLogSystemText(const LogSystem system) {
   }
 }
 
-void logv(const LogSystem system, const LogLevel level, const char *fmt, va_list args) {
+void logv(const LogSystem system, const LogLevel level, bool exception, const char *fmt, va_list args) {
   char buf[256];
   vsnprintf(buf, sizeof(buf), fmt, args);
-  Serial.print("[");
-  Serial.print(getLogLevelText(level));
-  Serial.print("][");
-  Serial.print(getLogSystemText(system));
-  Serial.print("]");
-  Serial.print(buf);
-  Serial.println();
+
+  std::stringstream ss;
+  ss << "[" << getLogLevelText(level).c_str() << "][" << getLogSystemText(system).c_str() << "] ";
+  ss << buf;
+
+  Serial.println(ss.str().c_str());
+
+  if (exception) {
+    throw Exception(ss.str());
+  }
 }
 
 void log(const LogSystem system, const LogLevel level, const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
-  logv(system, level, fmt, args);
+  logv(system, level, false, fmt, args);
   va_end(args);
 }
 
 void log_e(const LogSystem system, const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
-  logv(system, LogError, fmt, args);
+  logv(system, LogError, true, fmt, args);
   va_end(args);
 }
 
 void log_w(const LogSystem system, const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
-  logv(system, LogWarn, fmt, args);
+  logv(system, LogWarn, false, fmt, args);
   va_end(args);
 }
 
 void log_i(const LogSystem system, const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
-  logv(system, LogInfo, fmt, args);
+  logv(system, LogInfo, false, fmt, args);
   va_end(args);
 }
 
 void log_d(const LogSystem system, const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
-  logv(system, LogDebug, fmt, args);
+  logv(system, LogDebug, false, fmt, args);
   va_end(args);
 }
 
 void log_v(const LogSystem system, const char *fmt, ...) {
   va_list args;
   va_start(args, fmt);
-  logv(system, LogVerbose, fmt, args);
+  logv(system, LogVerbose, false, fmt, args);
   va_end(args);
 }
 
