@@ -12,7 +12,7 @@ void __attribute__((weak)) portduinoSetup() {
   log_i(SysCore, "No portduinoSetup() found, using default function...");
 }
 
-void __attribute__((weak)) portduinoCustomInit() {
+void __attribute__((weak)) portduinoInit() {
   log_i(SysCore, "No portduinoCustomInit() found, using default function...");
 }
 
@@ -27,10 +27,11 @@ int main() {
 
   portduinoVFS->mountpoint(fsRoot.c_str());
 
-  portduinoCustomInit();
+  portduinoInit();
 
   gpioInit();
   portduinoSetup();
+  
   setup();
   while (true) {
     gpioIdle();

@@ -4,6 +4,10 @@
 
 #include "Arduino.h"
 
+void portduinoInit() {
+  Wire.allowAddressNotFound();
+}
+
 #define TEST_PIN 7
 
 static SPISettings spiSettings(4000000, MSBFIRST, SPI_MODE0);

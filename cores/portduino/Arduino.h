@@ -12,6 +12,6 @@ using namespace arduino;
 
 extern void portduinoSetup();
 
-extern void portduinoCustomInit();
+extern void portduinoInit();
 
 #endif

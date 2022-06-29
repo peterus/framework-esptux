@@ -1,3 +1,2 @@
-
-ADD_EXECUTABLE(example test.cpp)
-TARGET_LINK_LIBRARIES(example Portduino)
+ADD_SUBDIRECTORY(basic)
+ADD_SUBDIRECTORY(WireScan)
