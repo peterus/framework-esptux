@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <cstdarg>
 
 #include "PortduinoHardwareSerial.h"
 #include "Utility.h"
