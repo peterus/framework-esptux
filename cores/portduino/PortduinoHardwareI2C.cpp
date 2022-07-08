@@ -6,11 +6,18 @@
 
 namespace arduino {
 
-I2CDevice::I2CDevice(uint8_t address) : _address(address) {
+I2CDevice::I2CDevice(uint8_t i2cAddress) : _i2cAddress(i2cAddress) {
+}
+
+I2CDevice::~I2CDevice() {
 }
 
 uint8_t I2CDevice::getAddress() const {
-  return _address;
+  return _i2cAddress;
+}
+
+void I2CDevice::begin(uint8_t registerAddress) {
+  _registerAddress = registerAddress;
 }
 
 PortduinoI2C::PortduinoI2C() : _allowAddressNotFound(false) {
@@ -40,15 +47,18 @@ void PortduinoI2C::beginTransmission(uint8_t address) {
     }
   }
   if (_allowAddressNotFound) {
-    log_i(SysI2C, "could not find I2C address: %d", address);
+    log_d(SysI2C, "could not find I2C address: %d", address);
   } else {
     log_e(SysI2C, "could not find I2C address: %d", address);
   }
 }
 
 uint8_t PortduinoI2C::endTransmission(bool stopBit) {
-  _selectedDevice.reset();
   UNUSED(stopBit);
+  if (_selectedDevice != 0) {
+    _selectedDevice.reset();
+    return 0;
+  }
   return 2;
 }
 

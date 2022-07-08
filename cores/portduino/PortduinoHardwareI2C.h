@@ -12,15 +12,21 @@ namespace arduino {
 
 class I2CDevice {
 public:
-  I2CDevice(uint8_t address);
+  I2CDevice(uint8_t i2cAddress);
+  virtual ~I2CDevice();
 
   uint8_t getAddress() const;
+
+  virtual void begin(uint8_t registerAddress);
 
   virtual size_t write(uint8_t data) = 0;
   virtual int    read()              = 0;
 
+protected:
+  uint8_t _registerAddress;
+
 private:
-  const uint8_t _address;
+  const uint8_t _i2cAddress;
 };
 
 class PortduinoI2C : public HardwareI2C {
