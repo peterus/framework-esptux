@@ -1,9 +1,5 @@
 #include "Arduino.h"
 
-void portduinoInit() {
-  Wire.allowAddressNotFound();
-}
-
 void setup() {
   Serial.begin(115200);
   Wire.begin();
@@ -20,16 +16,10 @@ void loop() {
     Wire.beginTransmission(address);
     error = Wire.endTransmission();
     if (error == 0) {
-      // Serial.printf("I2C device found at address 0x%02X\n", address);
-      Serial.print("I2C device found at address ");
-      Serial.println(address);
+      Serial.printf("I2C device found at address 0x%02X\n", address);
       nDevices++;
     } else if (error != 2) {
-      // Serial.printf("Error %d at address 0x%02X\n", error, address);
-      Serial.print("Error ");
-      Serial.print(error);
-      Serial.print(" at address ");
-      Serial.println(address);
+      Serial.printf("Error %d at address 0x%02X\n", error, address);
     }
   }
   if (nDevices == 0) {
