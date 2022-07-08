@@ -17,6 +17,7 @@ public:
   virtual size_t write(uint8_t) final;
   using Print::write;
   virtual operator bool() final;
+  size_t  printf(const char *format, ...);
 };
 
 extern PortduinoSerial Serial;
