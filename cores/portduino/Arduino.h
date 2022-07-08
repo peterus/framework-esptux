@@ -4,9 +4,9 @@
 #include <argp.h>
 
 #include "ArduinoAPI.h"
-#include "PortduinoHardwareI2C.h"
-#include "PortduinoHardwareSPI.h"
-#include "PortduinoHardwareSerial.h"
+#include "SimI2C.h"
+#include "SimSPI.h"
+#include "SimSerial.h"
 
 using namespace arduino;
 

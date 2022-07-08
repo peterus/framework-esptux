@@ -1,7 +1,7 @@
 #include <cstdarg>
 #include <stdio.h>
 
-#include "PortduinoHardwareSerial.h"
+#include "SimSerial.h"
 #include "Utility.h"
 
 namespace arduino {

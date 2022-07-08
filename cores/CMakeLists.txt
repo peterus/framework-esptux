@@ -15,9 +15,8 @@ ADD_LIBRARY(Portduino
         portduino/dtostrf.c
         portduino/itoa.cpp
         portduino/logging.cpp
-        portduino/PortduinoGPIO.cpp
-        portduino/PortduinoHardwareI2C.cpp
-        portduino/PortduinoHardwareSerial.cpp
-        portduino/PortduinoHardwareSPI.cpp
-        portduino/PortduinoPrint.cpp
+        portduino/SimGPIO.cpp
+        portduino/SimI2C.cpp
+        portduino/SimSerial.cpp
+        portduino/SimSPI.cpp
         portduino/Utility.cpp)

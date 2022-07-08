@@ -4,7 +4,7 @@
 
 #include "Arduino.h"
 #include "Common.h"
-#include "PortduinoGPIO.h"
+#include "SimGPIO.h"
 #include "Utility.h"
 #include "logging.h"
 

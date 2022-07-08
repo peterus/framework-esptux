@@ -3,7 +3,7 @@
 
 #include "Arduino.h"
 #include "PortduinoFS.h"
-#include "PortduinoGPIO.h"
+#include "SimGPIO.h"
 #include "logging.h"
 
 #define LOOPDELAY 100

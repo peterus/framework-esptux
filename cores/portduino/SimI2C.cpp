@@ -1,6 +1,6 @@
 #include <cstddef>
 
-#include "PortduinoHardwareI2C.h"
+#include "SimI2C.h"
 #include "Utility.h"
 #include "logging.h"
 

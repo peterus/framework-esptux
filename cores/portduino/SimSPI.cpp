@@ -1,7 +1,7 @@
 #include <assert.h>
 
-#include "PortduinoHardwareSPI.h"
 #include "SPIChip.h"
+#include "SimSPI.h"
 #include "Utility.h"
 #include "logging.h"
 
