@@ -8,6 +8,18 @@
 
 namespace arduino {
 
+constexpr int MAX_SYSTEM_LOG = 100;
+
+LogLevel _levels[MAX_SYSTEM_LOG];
+
+void loggerInit() {
+  std::fill_n(_levels, MAX_SYSTEM_LOG, LogInfo);
+}
+
+void loggerSetLevel(const LogSystem system, const LogLevel level) {
+  _levels[system] = level;
+}
+
 String getLogLevelText(const LogLevel level) {
   switch (level) {
   case LogVerbose:
@@ -45,6 +57,10 @@ String getLogSystemText(const LogSystem system) {
 }
 
 void logv(const LogSystem system, const LogLevel level, bool exception, const char *fmt, va_list args) {
+  if (_levels[system] > level) {
+    return;
+  }
+
   char buf[256];
   vsnprintf(buf, sizeof(buf), fmt, args);
 

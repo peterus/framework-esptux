@@ -7,11 +7,11 @@ namespace arduino {
 
 enum LogLevel
 {
-  LogVerbose,
   LogDebug,
   LogInfo,
   LogWarn,
-  LogError
+  LogError,
+  LogVerbose
 };
 
 enum LogSystem
@@ -23,9 +23,12 @@ enum LogSystem
   SysInterrupt,
   SysWifi,
   SysFS,
-  // Ids greater than 1000 are used for application specific purposes
-  SysApp0 = 1000
+  // Ids greater than 20 are used for application specific purposes
+  SysApp0 = 20
 };
+
+void loggerInit();
+void loggerSetLevel(const LogSystem system, const LogLevel level);
 
 void log(const LogSystem system, const LogLevel level, const char *fmt, ...) __attribute__((format(printf, 3, 4)));
 

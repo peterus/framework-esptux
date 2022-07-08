@@ -17,6 +17,8 @@ void __attribute__((weak)) portduinoInit() {
 }
 
 int main() {
+  loggerInit();
+
   String fsRoot = ".portduino";
   mkdir(fsRoot.c_str(), 0700);
   fsRoot += "/default";
@@ -31,7 +33,7 @@ int main() {
 
   gpioInit();
   portduinoSetup();
-  
+
   setup();
   while (true) {
     gpioIdle();
