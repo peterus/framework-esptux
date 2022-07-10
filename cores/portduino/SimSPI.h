@@ -8,8 +8,6 @@
 #include "Utility.h"
 #include "logging.h"
 
-namespace arduino {
-
 class SimSPI : public HardwareSPI {
 public:
   virtual uint8_t  transfer(uint8_t data) final;
@@ -31,7 +29,5 @@ public:
 };
 
 extern SimSPI SPI;
-
-} // namespace arduino
 
 #endif

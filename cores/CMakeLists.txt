@@ -9,7 +9,7 @@ ADD_LIBRARY(Portduino
         portduino/FS/FS.cpp
         portduino/FS/vfs_api.cpp
 
-        portduino/Arduino.cpp
+        portduino/main.cpp
         portduino/Common.cpp
         portduino/dtostrf.c
         portduino/itoa.cpp

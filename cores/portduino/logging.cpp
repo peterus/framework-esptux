@@ -6,8 +6,6 @@
 #include "Utility.h"
 #include "logging.h"
 
-namespace arduino {
-
 constexpr int MAX_SYSTEM_LOG = 100;
 
 LogLevel _levels[MAX_SYSTEM_LOG];
@@ -116,5 +114,3 @@ void log_v(const LogSystem system, const char *fmt, ...) {
   logv(system, LogVerbose, false, fmt, args);
   va_end(args);
 }
-
-} // namespace arduino

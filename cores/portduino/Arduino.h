@@ -4,14 +4,18 @@
 #include <argp.h>
 
 #include "ArduinoAPI.h"
+
+using namespace arduino;
+
 #include "FS/FS.h"
+
+using namespace fs;
+
 #include "SimI2C.h"
 #include "SimSPI.h"
 #include "SimSerial.h"
 
-using namespace arduino;
-
-extern fs::FS PortduinoFS;
+extern FS PortduinoFS;
 
 extern void coreSetup();
 

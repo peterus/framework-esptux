@@ -3,8 +3,6 @@
 
 #include <cstdarg>
 
-namespace arduino {
-
 enum LogLevel
 {
   LogDebug,
@@ -37,7 +35,5 @@ void log_w(const LogSystem system, const char *fmt, ...) __attribute__((format(p
 void log_i(const LogSystem system, const char *fmt, ...) __attribute__((format(printf, 2, 3)));
 void log_d(const LogSystem system, const char *fmt, ...) __attribute__((format(printf, 2, 3)));
 void log_v(const LogSystem system, const char *fmt, ...) __attribute__((format(printf, 2, 3)));
-
-} // namespace arduino
 
 #endif

@@ -5,7 +5,7 @@
 #include "logging.h"
 
 void notImplemented(const char *msg) {
-  log_w(arduino::SysCore, "%s is not implemented", msg);
+  log_w(SysCore, "%s is not implemented", msg);
 }
 
 int checkNotNeg(int result, const char *msg, ...) {

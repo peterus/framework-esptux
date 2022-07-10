@@ -21,7 +21,6 @@
 #ifndef FS_H_
 #define FS_H_
 
-//#include <Arduino.h>
 #include <Stream.h>
 #include <memory>
 

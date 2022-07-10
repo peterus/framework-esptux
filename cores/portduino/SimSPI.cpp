@@ -1,13 +1,12 @@
 #include <assert.h>
 
+#include "Arduino.h"
 #include "SPIChip.h"
 #include "SimSPI.h"
 #include "Utility.h"
 #include "logging.h"
 
 SPIChip *spiChip;
-
-namespace arduino {
 
 uint8_t SimSPI::transfer(uint8_t data) {
   uint8_t response;
@@ -67,5 +66,3 @@ void SimSPI::end() {
 }
 
 SimSPI SPI;
-
-} // namespace arduino

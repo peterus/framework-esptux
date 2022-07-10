@@ -23,7 +23,7 @@ private:
 };
 
 void coreInit() {
-  loggerSetLevel(SysI2C, arduino::LogInfo);
+  loggerSetLevel(SysI2C, LogInfo);
   Wire.allowAddressNotFound();
 }
 

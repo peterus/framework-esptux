@@ -3,8 +3,6 @@
 
 #include "HardwareSerial.h"
 
-namespace arduino {
-
 class SimSerial : public HardwareSerial {
 public:
   virtual void   begin(unsigned long baudrate) final;
@@ -21,7 +19,5 @@ public:
 };
 
 extern SimSerial Serial;
-
-} // namespace arduino
 
 #endif

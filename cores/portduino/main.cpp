@@ -22,6 +22,7 @@ void __attribute__((weak)) coreInit() {
 }
 
 int main() {
+  (void)millis(); // to start timer
   loggerInit();
 
   String fsRoot = ".portduino";

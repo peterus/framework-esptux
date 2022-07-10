@@ -1,10 +1,9 @@
 #include <cstdarg>
 #include <stdio.h>
 
-#include "SimSerial.h"
+#include "Arduino.h"
 #include "Utility.h"
 
-namespace arduino {
 SimSerial Serial;
 
 void SimSerial::begin(unsigned long baudrate) {
@@ -54,5 +53,3 @@ size_t SimSerial::printf(const char *format, ...) {
   va_end(args);
   return strlen(buf);
 }
-
-} // namespace arduino

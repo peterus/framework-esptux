@@ -8,8 +8,6 @@
 #include "HardwareI2C.h"
 #include "Utility.h"
 
-namespace arduino {
-
 class I2CDevice {
 public:
   I2CDevice(uint8_t i2cAddress);
@@ -69,7 +67,5 @@ private:
 };
 
 extern SimI2C Wire;
-
-} // namespace arduino
 
 #endif

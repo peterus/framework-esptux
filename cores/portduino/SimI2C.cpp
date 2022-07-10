@@ -1,10 +1,8 @@
 #include <cstddef>
 
-#include "SimI2C.h"
+#include "Arduino.h"
 #include "Utility.h"
 #include "logging.h"
-
-namespace arduino {
 
 I2CDevice::I2CDevice(uint8_t i2cAddress) : _i2cAddress(i2cAddress) {
 }
@@ -128,4 +126,3 @@ void SimI2C::allowAddressNotFound(bool allow) {
 }
 
 SimI2C Wire;
-} // namespace arduino
