@@ -22,12 +22,12 @@ private:
   int _mem[256];
 };
 
-void portduinoInit() {
+void coreInit() {
   loggerSetLevel(SysI2C, arduino::LogInfo);
   Wire.allowAddressNotFound();
 }
 
-void portduinoSetup() {
+void coreSetup() {
   Wire.addI2CDevice(std::make_shared<Memory>(120));
   Wire.addI2CDevice(std::make_shared<Memory>(126));
   Wire.addI2CDevice(std::make_shared<Memory>(0x12));

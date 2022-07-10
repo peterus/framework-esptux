@@ -1,5 +1,5 @@
-#ifndef PORTUINO_HARDWARE_H_
-#define PORTUINO_HARDWARE_H_
+#ifndef SIM_HARDWARE_H_
+#define SIM_HARDWARE_H_
 
 #include <assert.h>
 
@@ -10,7 +10,7 @@
 
 namespace arduino {
 
-class PortduinoSPI : public HardwareSPI {
+class SimSPI : public HardwareSPI {
 public:
   virtual uint8_t  transfer(uint8_t data) final;
   virtual uint16_t transfer16(uint16_t data) final;
@@ -30,7 +30,7 @@ public:
   virtual void end() final;
 };
 
-extern PortduinoSPI SPI;
+extern SimSPI SPI;
 
 } // namespace arduino
 

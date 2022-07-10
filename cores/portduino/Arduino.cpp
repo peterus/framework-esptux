@@ -2,18 +2,23 @@
 #include <stdio.h>
 
 #include "Arduino.h"
-#include "PortduinoFS.h"
 #include "SimGPIO.h"
 #include "logging.h"
+#include "vfs_api.h"
 
 #define LOOPDELAY 100
 
-void __attribute__((weak)) portduinoSetup() {
-  log_i(SysCore, "No portduinoSetup() found, using default function...");
+using namespace fs;
+
+std::shared_ptr<VFSImpl> portduinoVFS = std::make_shared<VFSImpl>();
+FS                       PortduinoFS  = FS(portduinoVFS);
+
+void __attribute__((weak)) coreSetup() {
+  log_i(SysCore, "No coreSetup() found, using default function...");
 }
 
-void __attribute__((weak)) portduinoInit() {
-  log_i(SysCore, "No portduinoCustomInit() found, using default function...");
+void __attribute__((weak)) coreInit() {
+  log_i(SysCore, "No coreCustomInit() found, using default function...");
 }
 
 int main() {
@@ -29,10 +34,10 @@ int main() {
 
   portduinoVFS->mountpoint(fsRoot.c_str());
 
-  portduinoInit();
+  coreInit();
 
   gpioInit();
-  portduinoSetup();
+  coreSetup();
 
   setup();
   while (true) {

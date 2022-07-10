@@ -20,26 +20,26 @@ void I2CDevice::begin(uint8_t registerAddress) {
   _registerAddress = registerAddress;
 }
 
-PortduinoI2C::PortduinoI2C() : _allowAddressNotFound(false) {
+SimI2C::SimI2C() : _allowAddressNotFound(false) {
 }
 
-void PortduinoI2C::begin() {
+void SimI2C::begin() {
 }
 
-void PortduinoI2C::begin(uint8_t address) {
+void SimI2C::begin(uint8_t address) {
   UNUSED(address);
   notImplemented("I2C master mode not implemented!");
 }
 
-void PortduinoI2C::end() {
+void SimI2C::end() {
   _selectedDevice.reset();
 }
 
-void PortduinoI2C::setClock(uint32_t freq) {
+void SimI2C::setClock(uint32_t freq) {
   UNUSED(freq);
 }
 
-void PortduinoI2C::beginTransmission(uint8_t address) {
+void SimI2C::beginTransmission(uint8_t address) {
   for (std::shared_ptr<I2CDevice> device : _devices) {
     if (device->getAddress() == address) {
       _selectedDevice = device;
@@ -53,7 +53,7 @@ void PortduinoI2C::beginTransmission(uint8_t address) {
   }
 }
 
-uint8_t PortduinoI2C::endTransmission(bool stopBit) {
+uint8_t SimI2C::endTransmission(bool stopBit) {
   UNUSED(stopBit);
   if (_selectedDevice != 0) {
     _selectedDevice.reset();
@@ -62,11 +62,11 @@ uint8_t PortduinoI2C::endTransmission(bool stopBit) {
   return 2;
 }
 
-uint8_t PortduinoI2C::endTransmission(void) {
+uint8_t SimI2C::endTransmission(void) {
   return endTransmission(true);
 }
 
-size_t PortduinoI2C::requestFrom(uint8_t address, size_t len, bool stopBit) {
+size_t SimI2C::requestFrom(uint8_t address, size_t len, bool stopBit) {
   UNUSED(address);
   UNUSED(len);
   UNUSED(stopBit);
@@ -74,19 +74,19 @@ size_t PortduinoI2C::requestFrom(uint8_t address, size_t len, bool stopBit) {
   return 0;
 }
 
-size_t PortduinoI2C::requestFrom(uint8_t address, size_t len) {
+size_t SimI2C::requestFrom(uint8_t address, size_t len) {
   return requestFrom(address, len, true);
 }
 
-void PortduinoI2C::onReceive(void (*)(int)) {
+void SimI2C::onReceive(void (*)(int)) {
   notImplemented("onReceive");
 }
 
-void PortduinoI2C::onRequest(void (*)(void)) {
+void SimI2C::onRequest(void (*)(void)) {
   notImplemented("onRequest");
 }
 
-size_t PortduinoI2C::write(uint8_t data) {
+size_t SimI2C::write(uint8_t data) {
   notImplemented("writei2c");
   if (!_selectedDevice) {
     log_e(SysI2C, "no I2C device selected!");
@@ -94,19 +94,19 @@ size_t PortduinoI2C::write(uint8_t data) {
   return _selectedDevice->write(data);
 }
 
-size_t PortduinoI2C::write(const uint8_t *buffer, size_t size) {
+size_t SimI2C::write(const uint8_t *buffer, size_t size) {
   for (size_t i = 0; i < size; i++) {
     write(buffer[i]);
   }
   return size;
 }
 
-int PortduinoI2C::available() {
+int SimI2C::available() {
   notImplemented("i2cavailable");
   return 0;
 }
 
-int PortduinoI2C::read() {
+int SimI2C::read() {
   notImplemented("writei2c");
   if (!_selectedDevice) {
     log_e(SysI2C, "no I2C device selected!");
@@ -114,18 +114,18 @@ int PortduinoI2C::read() {
   return _selectedDevice->read();
 }
 
-int PortduinoI2C::peek() {
+int SimI2C::peek() {
   notImplemented("i2cpeek");
   return -1;
 }
 
-void PortduinoI2C::addI2CDevice(std::shared_ptr<I2CDevice> device) {
+void SimI2C::addI2CDevice(std::shared_ptr<I2CDevice> device) {
   _devices.push_back(device);
 }
 
-void PortduinoI2C::allowAddressNotFound(bool allow) {
+void SimI2C::allowAddressNotFound(bool allow) {
   _allowAddressNotFound = allow;
 }
 
-PortduinoI2C Wire;
+SimI2C Wire;
 } // namespace arduino

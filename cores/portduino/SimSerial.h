@@ -1,11 +1,11 @@
-#ifndef PORTDUINO_HARDWARE_SERIAL_H_
-#define PORTDUINO_HARDWARE_SERIAL_H_
+#ifndef SIM_HARDWARE_SERIAL_H_
+#define SIM_HARDWARE_SERIAL_H_
 
 #include "HardwareSerial.h"
 
 namespace arduino {
 
-class PortduinoSerial : public HardwareSerial {
+class SimSerial : public HardwareSerial {
 public:
   virtual void   begin(unsigned long baudrate) final;
   virtual void   begin(unsigned long baudrate, uint16_t config) final;
@@ -20,7 +20,7 @@ public:
   size_t  printf(const char *format, ...);
 };
 
-extern PortduinoSerial Serial;
+extern SimSerial Serial;
 
 } // namespace arduino
 

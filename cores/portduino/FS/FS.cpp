@@ -23,247 +23,225 @@
 
 using namespace fs;
 
-size_t File::write(uint8_t c)
-{
-    if (!_p) {
-        return 0;
-    }
-
-    return _p->write(&c, 1);
+File::File(FileImplPtr p) : _p(p) {
+  _timeout = 0;
 }
 
-time_t File::getLastWrite()
-{
-    if (!_p) {
-        return 0;
-    }
+size_t File::write(uint8_t c) {
+  if (!_p) {
+    return 0;
+  }
 
-    return _p->getLastWrite();
+  return _p->write(&c, 1);
 }
 
-size_t File::write(const uint8_t *buf, size_t size)
-{
-    if (!_p) {
-        return 0;
-    }
+time_t File::getLastWrite() {
+  if (!_p) {
+    return 0;
+  }
 
-    return _p->write(buf, size);
+  return _p->getLastWrite();
 }
 
-int File::available()
-{
-    if (!_p) {
-        return false;
-    }
+size_t File::write(const uint8_t *buf, size_t size) {
+  if (!_p) {
+    return 0;
+  }
 
-    return _p->size() - _p->position();
+  return _p->write(buf, size);
 }
 
-int File::read()
-{
-    if (!_p) {
-        return -1;
-    }
+int File::available() {
+  if (!_p) {
+    return false;
+  }
 
-    uint8_t result;
-    if (_p->read(&result, 1) != 1) {
-        return -1;
-    }
-
-    return result;
+  return _p->size() - _p->position();
 }
 
-size_t File::read(uint8_t* buf, size_t size)
-{
-    if (!_p) {
-        return -1;
-    }
+int File::read() {
+  if (!_p) {
+    return -1;
+  }
 
-    return _p->read(buf, size);
+  uint8_t result;
+  if (_p->read(&result, 1) != 1) {
+    return -1;
+  }
+
+  return result;
 }
 
-int File::peek()
-{
-    if (!_p) {
-        return -1;
-    }
+size_t File::read(uint8_t *buf, size_t size) {
+  if (!_p) {
+    return -1;
+  }
 
-    size_t curPos = _p->position();
-    int result = read();
-    seek(curPos, SeekSet);
-    return result;
+  return _p->read(buf, size);
 }
 
-void File::flush()
-{
-    if (!_p) {
-        return;
-    }
-
-    _p->flush();
+size_t File::readBytes(char *buffer, size_t length) {
+  return read((uint8_t *)buffer, length);
 }
 
-bool File::seek(uint32_t pos, SeekMode mode)
-{
-    if (!_p) {
-        return false;
-    }
+int File::peek() {
+  if (!_p) {
+    return -1;
+  }
 
-    return _p->seek(pos, mode);
+  size_t curPos = _p->position();
+  int    result = read();
+  seek(curPos, SeekSet);
+  return result;
 }
 
-size_t File::position() const
-{
-    if (!_p) {
-        return 0;
-    }
+void File::flush() {
+  if (!_p) {
+    return;
+  }
 
-    return _p->position();
+  _p->flush();
 }
 
-size_t File::size() const
-{
-    if (!_p) {
-        return 0;
-    }
+bool File::seek(uint32_t pos, SeekMode mode) {
+  if (!_p) {
+    return false;
+  }
 
-    return _p->size();
+  return _p->seek(pos, mode);
 }
 
-void File::close()
-{
-    if (_p) {
-        _p->close();
-        _p = nullptr;
-    }
+bool File::seek(uint32_t pos) {
+  return seek(pos, SeekSet);
 }
 
-File::operator bool() const
-{
-    return !!_p;
+size_t File::position() const {
+  if (!_p) {
+    return 0;
+  }
+
+  return _p->position();
 }
 
-const char* File::name() const
-{
-    if (!_p) {
-        return nullptr;
-    }
+size_t File::size() const {
+  if (!_p) {
+    return 0;
+  }
 
-    return _p->name();
+  return _p->size();
 }
 
-//to implement
-boolean File::isDirectory(void)
-{
-    if (!_p) {
-        return false;
-    }
-    return _p->isDirectory();
+void File::close() {
+  if (_p) {
+    _p->close();
+    _p = nullptr;
+  }
 }
 
-File File::openNextFile(const char* mode)
-{
-    if (!_p) {
-        return File();
-    }
-    return _p->openNextFile(mode);
+File::operator bool() const {
+  return !!_p;
 }
 
-void File::rewindDirectory(void)
-{
-    if (!_p) {
-        return;
-    }
-    _p->rewindDirectory();
+const char *File::name() const {
+  if (!_p) {
+    return nullptr;
+  }
+
+  return _p->name();
 }
 
-File FS::open(const String& path, const char* mode)
-{
-    return open(path.c_str(), mode);
+bool File::isDirectory(void) {
+  if (!_p) {
+    return false;
+  }
+  return _p->isDirectory();
 }
 
-File FS::open(const char* path, const char* mode)
-{
-    if (!_impl) {
-        return File();
-    }
-
-    return File(_impl->open(path, mode));
+File File::openNextFile(const char *mode) {
+  if (!_p) {
+    return File();
+  }
+  return _p->openNextFile(mode);
 }
 
-bool FS::exists(const char* path)
-{
-    if (!_impl) {
-        return false;
-    }
-    return _impl->exists(path);
+void File::rewindDirectory(void) {
+  if (!_p) {
+    return;
+  }
+  _p->rewindDirectory();
 }
 
-bool FS::exists(const String& path)
-{
-    return exists(path.c_str());
+File FS::open(const String &path, const char *mode) {
+  return open(path.c_str(), mode);
 }
 
-bool FS::remove(const char* path)
-{
-    if (!_impl) {
-        return false;
-    }
-    return _impl->remove(path);
+File FS::open(const char *path, const char *mode) {
+  if (!_impl) {
+    return File();
+  }
+
+  return File(_impl->open(path, mode));
 }
 
-bool FS::remove(const String& path)
-{
-    return remove(path.c_str());
+bool FS::exists(const char *path) {
+  if (!_impl) {
+    return false;
+  }
+  return _impl->exists(path);
 }
 
-bool FS::rename(const char* pathFrom, const char* pathTo)
-{
-    if (!_impl) {
-        return false;
-    }
-    return _impl->rename(pathFrom, pathTo);
+bool FS::exists(const String &path) {
+  return exists(path.c_str());
 }
 
-bool FS::rename(const String& pathFrom, const String& pathTo)
-{
-    return rename(pathFrom.c_str(), pathTo.c_str());
+bool FS::remove(const char *path) {
+  if (!_impl) {
+    return false;
+  }
+  return _impl->remove(path);
 }
 
-
-bool FS::mkdir(const char *path)
-{
-    if (!_impl) {
-        return false;
-    }
-    return _impl->mkdir(path);
+bool FS::remove(const String &path) {
+  return remove(path.c_str());
 }
 
-bool FS::mkdir(const String &path)
-{
-    return mkdir(path.c_str());
+bool FS::rename(const char *pathFrom, const char *pathTo) {
+  if (!_impl) {
+    return false;
+  }
+  return _impl->rename(pathFrom, pathTo);
 }
 
-bool FS::rmdir(const char *path)
-{
-    if (!_impl) {
-        return false;
-    }
-    return _impl->rmdir(path);
+bool FS::rename(const String &pathFrom, const String &pathTo) {
+  return rename(pathFrom.c_str(), pathTo.c_str());
 }
 
-bool FS::rmdir(const String &path)
-{
-    return rmdir(path.c_str());
+bool FS::mkdir(const char *path) {
+  if (!_impl) {
+    return false;
+  }
+  return _impl->mkdir(path);
 }
 
-
-void FSImpl::mountpoint(const char * mp)
-{
-    _mountpoint = mp;
+bool FS::mkdir(const String &path) {
+  return mkdir(path.c_str());
 }
 
-const char * FSImpl::mountpoint()
-{
-    return _mountpoint;
+bool FS::rmdir(const char *path) {
+  if (!_impl) {
+    return false;
+  }
+  return _impl->rmdir(path);
+}
+
+bool FS::rmdir(const String &path) {
+  return rmdir(path.c_str());
+}
+
+void FSImpl::mountpoint(const char *mp) {
+  _mountpoint = mp;
+}
+
+const char *FSImpl::mountpoint() {
+  return _mountpoint;
 }

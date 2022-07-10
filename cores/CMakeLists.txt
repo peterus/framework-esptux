@@ -7,7 +7,6 @@ ADD_LIBRARY(Portduino
         arduino/api/String.cpp
 
         portduino/FS/FS.cpp
-        portduino/FS/PortduinoFS.cpp
         portduino/FS/vfs_api.cpp
 
         portduino/Arduino.cpp

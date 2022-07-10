@@ -8,7 +8,7 @@ void notImplemented(const char *msg) {
   log_w(arduino::SysCore, "%s is not implemented", msg);
 }
 
-int portduinoCheckNotNeg(int result, const char *msg, ...) {
+int checkNotNeg(int result, const char *msg, ...) {
   if (result < 0) {
     printf("Portduino notneg errno=%d: %s\n", errno, msg);
     throw Exception(msg);
@@ -16,7 +16,7 @@ int portduinoCheckNotNeg(int result, const char *msg, ...) {
   return result;
 }
 
-int portduinoCheckZero(int result, const char *msg, ...) {
+int checkZero(int result, const char *msg, ...) {
   if (result != 0) {
     printf("Portduino checkzero %d: %s\n", result, msg);
     throw Exception(msg);
@@ -24,6 +24,6 @@ int portduinoCheckZero(int result, const char *msg, ...) {
   return result;
 }
 
-void portduinoDebug() {
+void debug() {
   std::raise(SIGINT);
 }

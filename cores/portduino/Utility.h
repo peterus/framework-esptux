@@ -12,10 +12,10 @@ public:
 
 void notImplemented(const char *msg);
 
-int portduinoCheckNotNeg(int result, const char *msg, ...);
-int portduinoCheckZero(int result, const char *msg, ...);
+int checkNotNeg(int result, const char *msg, ...);
+int checkZero(int result, const char *msg, ...);
 
-void portduinoDebug();
+void debug();
 
 #define UNUSED(x) (void)(x)
 

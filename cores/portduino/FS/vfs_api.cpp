@@ -16,6 +16,7 @@
 #include "logging.h"
 
 using namespace fs;
+using namespace arduino;
 
 FileImplPtr VFSImpl::open(const char *path, const char *mode) {
   if (!_mountpoint) {
@@ -352,7 +353,7 @@ const char *VFSFileImpl::name() const {
 }
 
 // to implement
-boolean VFSFileImpl::isDirectory(void) {
+bool VFSFileImpl::isDirectory(void) {
   return _isDirectory;
 }
 

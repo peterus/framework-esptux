@@ -1,5 +1,5 @@
-#ifndef PORTDUINO_HARDWAREI2C_H_
-#define PORTDUINO_HARDWAREI2C_H_
+#ifndef SIM_HARDWAREI2C_H_
+#define SIM_HARDWAREI2C_H_
 
 #include <cstdint>
 #include <list>
@@ -29,9 +29,9 @@ private:
   const uint8_t _i2cAddress;
 };
 
-class PortduinoI2C : public HardwareI2C {
+class SimI2C : public HardwareI2C {
 public:
-  PortduinoI2C();
+  SimI2C();
 
   virtual void begin() final;
   virtual void begin(uint8_t address) final;
@@ -68,7 +68,7 @@ private:
   std::list<std::shared_ptr<I2CDevice>> _devices;
 };
 
-extern PortduinoI2C Wire;
+extern SimI2C Wire;
 
 } // namespace arduino
 

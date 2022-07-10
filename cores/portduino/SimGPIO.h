@@ -1,5 +1,5 @@
-#ifndef PORTDUINO_GPIO_H_
-#define PORTDUINO_GPIO_H_
+#ifndef SIM_GPIO_H_
+#define SIM_GPIO_H_
 
 #include <assert.h>
 #include <stdlib.h>
