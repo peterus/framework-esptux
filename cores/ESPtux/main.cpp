@@ -2,16 +2,16 @@
 #include <stdio.h>
 
 #include "Arduino.h"
+#include "FS/vfs_api.h"
 #include "SimGPIO.h"
 #include "logging.h"
-#include "vfs_api.h"
 
 #define LOOPDELAY 100
 
 using namespace fs;
 
-std::shared_ptr<VFSImpl> portduinoVFS = std::make_shared<VFSImpl>();
-FS                       PortduinoFS  = FS(portduinoVFS);
+std::shared_ptr<VFSImpl> TuxVFS = std::make_shared<VFSImpl>();
+FS                       TuxFS  = FS(TuxVFS);
 
 void __attribute__((weak)) coreSetup() {
   log_i(SysCore, "No coreSetup() found, using default function...");
@@ -25,15 +25,15 @@ int main() {
   (void)millis(); // to start timer
   loggerInit();
 
-  String fsRoot = ".portduino";
+  String fsRoot = ".ArduTux";
   mkdir(fsRoot.c_str(), 0700);
   fsRoot += "/default";
   mkdir(fsRoot.c_str(), 0700);
 
-  log_i(SysCore, "Portduino is starting up");
+  log_i(SysCore, "ArduTux is starting up");
   log_i(SysCore, "VFS root at %s", fsRoot.c_str());
 
-  portduinoVFS->mountpoint(fsRoot.c_str());
+  TuxVFS->mountpoint(fsRoot.c_str());
 
   coreInit();
 

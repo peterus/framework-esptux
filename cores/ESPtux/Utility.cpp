@@ -10,7 +10,7 @@ void notImplemented(const char *msg) {
 
 int checkNotNeg(int result, const char *msg, ...) {
   if (result < 0) {
-    printf("Portduino notneg errno=%d: %s\n", errno, msg);
+    printf("notneg errno=%d: %s\n", errno, msg);
     throw Exception(msg);
   }
   return result;
@@ -18,7 +18,7 @@ int checkNotNeg(int result, const char *msg, ...) {
 
 int checkZero(int result, const char *msg, ...) {
   if (result != 0) {
-    printf("Portduino checkzero %d: %s\n", result, msg);
+    printf("checkzero %d: %s\n", result, msg);
     throw Exception(msg);
   }
   return result;

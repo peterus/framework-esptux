@@ -1,7 +1,7 @@
 {
-  "description": "Portduino framework",
-  "name": "framework-portduino",
+  "description": "ArduTux framework",
+  "name": "framework-ArduTux",
   "system": "*",
-  "url": "https://github.com/geeksville/framework-portduino",
+  "url": "https://github.com/peterus/framework-ArduTux",
   "version": "0.0.1"
 }

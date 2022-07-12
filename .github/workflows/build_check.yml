@@ -26,7 +26,7 @@ jobs:
     strategy:
       matrix:
         path:
-          - check: 'cores/portduino'
+          - check: 'cores/ESPtux'
             exclude: 'FS'
           - check: 'example'
             exclude: ''

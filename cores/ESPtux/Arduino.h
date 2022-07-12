@@ -15,7 +15,7 @@ using namespace fs;
 #include "SimSPI.h"
 #include "SimSerial.h"
 
-extern FS PortduinoFS;
+extern FS TuxFS;
 
 extern void coreSetup();
 
