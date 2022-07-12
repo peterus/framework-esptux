@@ -1,7 +1,7 @@
 {
-  "description": "ArduTux framework",
-  "name": "framework-ArduTux",
+  "description": "ESPtux framework",
+  "name": "framework-ESPtux",
   "system": "*",
-  "url": "https://github.com/peterus/framework-ArduTux",
+  "url": "https://github.com/peterus/framework-ESPtux",
   "version": "0.0.1"
 }

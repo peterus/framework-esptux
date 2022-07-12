@@ -25,12 +25,12 @@ int main() {
   (void)millis(); // to start timer
   loggerInit();
 
-  String fsRoot = ".ArduTux";
+  String fsRoot = ".ESPtux";
   mkdir(fsRoot.c_str(), 0700);
   fsRoot += "/default";
   mkdir(fsRoot.c_str(), 0700);
 
-  log_i(SysCore, "ArduTux is starting up");
+  log_i(SysCore, "ESPtux is starting up");
   log_i(SysCore, "VFS root at %s", fsRoot.c_str());
 
   TuxVFS->mountpoint(fsRoot.c_str());
