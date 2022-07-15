@@ -15,7 +15,6 @@ ADD_LIBRARY(ESPtux
         ESPtux/itoa.cpp
         ESPtux/logging.cpp
         ESPtux/SimGPIO.cpp
-        ESPtux/SimI2C.cpp
         ESPtux/SimSerial.cpp
         ESPtux/SimSPI.cpp
         ESPtux/Utility.cpp)

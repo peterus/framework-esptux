@@ -1,4 +1,5 @@
 #include "Arduino.h"
+#include "Wire.h"
 #include "logging.h"
 
 class Memory : public I2CDevice {
@@ -24,11 +25,8 @@ private:
 
 void coreInit() {
   loggerSetLevel(SysI2C, LogInfo);
-  Wire.allowAddressNotFound();
 }
 
 void coreSetup() {
-  Wire.addI2CDevice(std::make_shared<Memory>(120));
-  Wire.addI2CDevice(std::make_shared<Memory>(126));
-  Wire.addI2CDevice(std::make_shared<Memory>(0x12));
+  Wire.addI2CDevice(std::make_shared<Memory>(0x55));
 }

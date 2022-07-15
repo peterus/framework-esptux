@@ -11,7 +11,6 @@ using namespace arduino;
 
 using namespace fs;
 
-#include "SimI2C.h"
 #include "SimSPI.h"
 #include "SimSerial.h"
 

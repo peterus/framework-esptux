@@ -1,7 +1,7 @@
 #include <cstddef>
 
-#include "Arduino.h"
 #include "Utility.h"
+#include "Wire.h"
 #include "logging.h"
 
 I2CDevice::I2CDevice(uint8_t i2cAddress) : _i2cAddress(i2cAddress) {
@@ -18,6 +18,10 @@ void I2CDevice::begin(uint8_t registerAddress) {
   _registerAddress = registerAddress;
 }
 
+void I2CDevice::resetRegisterAddress() {
+  _registerAddress = 0;
+}
+
 SimI2C::SimI2C() : _allowAddressNotFound(false) {
 }
 
@@ -26,7 +30,7 @@ void SimI2C::begin() {
 
 void SimI2C::begin(uint8_t address) {
   UNUSED(address);
-  notImplemented("I2C master mode not implemented!");
+  notImplemented("I2C master mode");
 }
 
 void SimI2C::end() {
@@ -41,6 +45,7 @@ void SimI2C::beginTransmission(uint8_t address) {
   for (std::shared_ptr<I2CDevice> device : _devices) {
     if (device->getAddress() == address) {
       _selectedDevice = device;
+      _selectedDevice->resetRegisterAddress();
       return;
     }
   }
@@ -65,10 +70,26 @@ uint8_t SimI2C::endTransmission(void) {
 }
 
 size_t SimI2C::requestFrom(uint8_t address, size_t len, bool stopBit) {
+  UNUSED(stopBit);
+
+  for (std::shared_ptr<I2CDevice> device : _devices) {
+    if (device->getAddress() == address) {
+      _selectedDevice = device;
+      _selectedDevice->resetRegisterAddress();
+      return len;
+    }
+  }
+  if (_allowAddressNotFound) {
+    log_d(SysI2C, "could not find I2C address: %d", address);
+  } else {
+    log_e(SysI2C, "could not find I2C address: %d", address);
+  }
+
+  return 0;
+
   UNUSED(address);
   UNUSED(len);
-  UNUSED(stopBit);
-  notImplemented("requestFrom");
+  notImplemented("SimI2C::requestFrom");
   return 0;
 }
 
@@ -77,15 +98,14 @@ size_t SimI2C::requestFrom(uint8_t address, size_t len) {
 }
 
 void SimI2C::onReceive(void (*)(int)) {
-  notImplemented("onReceive");
+  notImplemented("SimI2C::onReceive");
 }
 
 void SimI2C::onRequest(void (*)(void)) {
-  notImplemented("onRequest");
+  notImplemented("SimI2C::onRequest");
 }
 
 size_t SimI2C::write(uint8_t data) {
-  notImplemented("writei2c");
   if (!_selectedDevice) {
     log_e(SysI2C, "no I2C device selected!");
   }
@@ -100,12 +120,11 @@ size_t SimI2C::write(const uint8_t *buffer, size_t size) {
 }
 
 int SimI2C::available() {
-  notImplemented("i2cavailable");
+  notImplemented("SimI2C::available");
   return 0;
 }
 
 int SimI2C::read() {
-  notImplemented("writei2c");
   if (!_selectedDevice) {
     log_e(SysI2C, "no I2C device selected!");
   }
@@ -113,7 +132,7 @@ int SimI2C::read() {
 }
 
 int SimI2C::peek() {
-  notImplemented("i2cpeek");
+  notImplemented("SimI2C::peek");
   return -1;
 }
 

@@ -1,0 +1,3 @@
+
+ADD_SUBDIRECTORY(WireScan)
+ADD_SUBDIRECTORY(WireMaster)
