@@ -1,8 +1,8 @@
 #include <assert.h>
 
 #include "Arduino.h"
+#include "SPI.h"
 #include "SPIChip.h"
-#include "SimSPI.h"
 #include "Utility.h"
 #include "logging.h"
 

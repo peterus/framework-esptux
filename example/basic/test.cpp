@@ -3,6 +3,7 @@
 //
 
 #include "Arduino.h"
+#include "SPI.h"
 #include "Wire.h"
 
 void portduinoInit() {

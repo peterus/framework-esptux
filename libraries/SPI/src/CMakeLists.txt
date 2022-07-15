@@ -1,0 +1,2 @@
+
+ADD_LIBRARY(SPI SPI.cpp)

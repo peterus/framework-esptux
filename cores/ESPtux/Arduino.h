@@ -11,7 +11,6 @@ using namespace arduino;
 
 using namespace fs;
 
-#include "SimSPI.h"
 #include "SimSerial.h"
 
 extern FS TuxFS;
