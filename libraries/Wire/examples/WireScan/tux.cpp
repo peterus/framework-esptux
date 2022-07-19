@@ -2,9 +2,9 @@
 #include "Wire.h"
 #include "logging.h"
 
-class Memory : public I2CDevice {
+class Memory : public WireDevice {
 public:
-  Memory(uint8_t i2cAddress) : I2CDevice(i2cAddress) {
+  Memory(uint8_t i2cAddress) : WireDevice(i2cAddress) {
   }
 
   virtual size_t write(uint8_t data) final {

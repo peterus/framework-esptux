@@ -1,2 +1,2 @@
 
-ADD_LIBRARY(Wire Wire.cpp)
+ADD_LIBRARY(Wire Wire.cpp WireDevice.cpp)

@@ -7,26 +7,7 @@
 
 #include "Arduino.h"
 #include "HardwareI2C.h"
-
-class I2CDevice {
-public:
-  I2CDevice(uint8_t i2cAddress);
-  virtual ~I2CDevice();
-
-  uint8_t getAddress() const;
-
-  virtual void begin(uint8_t registerAddress);
-  void         resetRegisterAddress();
-
-  virtual size_t write(uint8_t data) = 0;
-  virtual int    read()              = 0;
-
-protected:
-  uint8_t _registerAddress;
-
-private:
-  const uint8_t _i2cAddress;
-};
+#include "WireDevice.h"
 
 class SimI2C : public HardwareI2C {
 public:
@@ -57,14 +38,14 @@ public:
   virtual int peek() final;
 
   // I2C sim handling functions - do not use in Arduino code!
-  void addI2CDevice(std::shared_ptr<I2CDevice> device);
+  void addI2CDevice(std::shared_ptr<WireDevice> device);
   void allowAddressNotFound(bool allow = true);
 
 private:
   bool _allowAddressNotFound;
 
-  std::shared_ptr<I2CDevice>            _selectedDevice;
-  std::list<std::shared_ptr<I2CDevice>> _devices;
+  std::shared_ptr<WireDevice>            _selectedDevice;
+  std::list<std::shared_ptr<WireDevice>> _devices;
 };
 
 extern SimI2C Wire;

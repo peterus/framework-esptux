@@ -1,24 +1,22 @@
-#include <cstddef>
-
-#include "Utility.h"
 #include "Wire.h"
+#include "Utility.h"
 #include "logging.h"
 
-I2CDevice::I2CDevice(uint8_t i2cAddress) : _i2cAddress(i2cAddress) {
+WireDevice::WireDevice(uint8_t i2cAddress) : _i2cAddress(i2cAddress) {
 }
 
-I2CDevice::~I2CDevice() {
+WireDevice::~WireDevice() {
 }
 
-uint8_t I2CDevice::getAddress() const {
+uint8_t WireDevice::getAddress() const {
   return _i2cAddress;
 }
 
-void I2CDevice::begin(uint8_t registerAddress) {
+void WireDevice::begin(uint8_t registerAddress) {
   _registerAddress = registerAddress;
 }
 
-void I2CDevice::resetRegisterAddress() {
+void WireDevice::resetRegisterAddress() {
   _registerAddress = 0;
 }
 
@@ -42,7 +40,7 @@ void SimI2C::setClock(uint32_t freq) {
 }
 
 void SimI2C::beginTransmission(uint8_t address) {
-  for (std::shared_ptr<I2CDevice> device : _devices) {
+  for (std::shared_ptr<WireDevice> device : _devices) {
     if (device->getAddress() == address) {
       _selectedDevice = device;
       _selectedDevice->resetRegisterAddress();
@@ -72,7 +70,7 @@ uint8_t SimI2C::endTransmission(void) {
 size_t SimI2C::requestFrom(uint8_t address, size_t len, bool stopBit) {
   UNUSED(stopBit);
 
-  for (std::shared_ptr<I2CDevice> device : _devices) {
+  for (std::shared_ptr<WireDevice> device : _devices) {
     if (device->getAddress() == address) {
       _selectedDevice = device;
       _selectedDevice->resetRegisterAddress();
@@ -136,7 +134,7 @@ int SimI2C::peek() {
   return -1;
 }
 
-void SimI2C::addI2CDevice(std::shared_ptr<I2CDevice> device) {
+void SimI2C::addI2CDevice(std::shared_ptr<WireDevice> device) {
   _devices.push_back(device);
 }
 
