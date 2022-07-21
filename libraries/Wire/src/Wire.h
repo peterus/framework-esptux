@@ -9,9 +9,10 @@
 #include "HardwareI2C.h"
 #include "WireDevice.h"
 
-class SimI2C : public HardwareI2C {
+class TwoWire : public HardwareI2C {
 public:
-  SimI2C();
+  TwoWire();
+  ~TwoWire();
 
   virtual void begin() final;
   virtual void begin(uint8_t address) final;
@@ -48,6 +49,6 @@ private:
   std::list<std::shared_ptr<WireDevice>> _devices;
 };
 
-extern SimI2C Wire;
+extern TwoWire Wire;
 
 #endif
