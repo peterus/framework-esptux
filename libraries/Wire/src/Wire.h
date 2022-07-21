@@ -12,7 +12,7 @@
 class TwoWire : public HardwareI2C {
 public:
   TwoWire();
-  ~TwoWire();
+  virtual ~TwoWire();
 
   virtual void begin() final;
   virtual void begin(uint8_t address) final;
