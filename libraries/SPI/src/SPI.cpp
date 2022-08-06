@@ -1,4 +1,6 @@
 #include <assert.h>
+#include <cstddef>
+#include <utility>
 
 #include "Arduino.h"
 #include "SPI.h"
@@ -6,27 +8,38 @@
 #include "Utility.h"
 #include "logging.h"
 
-SPIChip *spiChip;
+SimSPI::SimSPI() : _ss(-1) {
+}
+
+void SimSPI::begin() {
+  begin(18, 19, 23, 5);
+}
+
+void SimSPI::begin(int8_t sck, int8_t miso, int8_t mosi, int8_t ss) {
+  UNUSED(sck);
+  UNUSED(miso);
+  UNUSED(mosi);
+  _ss = ss;
+}
+
+void SimSPI::end() {
+}
 
 uint8_t SimSPI::transfer(uint8_t data) {
-  uint8_t response;
-  assert(spiChip);
-  spiChip->transfer(&data, &response, 1, false);
-  return response;
+  std::shared_ptr<SPIChip> spi_chip = getActiveSPIChip();
+  return spi_chip->transfer(data);
 }
 
 uint16_t SimSPI::transfer16(uint16_t data) {
   UNUSED(data);
   notImplemented("transfer16");
-  return 0x4242;
+  return 0x0000;
 }
 
 void SimSPI::transfer(void *buf, size_t count) {
-  UNUSED(buf);
-  UNUSED(count);
-  notImplemented("spi general transfer");
-  assert(spiChip);
-  // spiChip->transfer(buf, buf, count);
+  for (size_t i = 0; i < count; i++) {
+    transfer(((uint8_t *)buf)[i]);
+  }
 }
 
 void SimSPI::usingInterrupt(int interruptNumber) {
@@ -43,7 +56,6 @@ void SimSPI::beginTransaction(SPISettings settings) {
 }
 
 void SimSPI::endTransaction(void) {
-  assert(spiChip);
 }
 
 void SimSPI::attachInterrupt() {
@@ -52,17 +64,22 @@ void SimSPI::attachInterrupt() {
 void SimSPI::detachInterrupt() {
 }
 
-void SimSPI::begin() {
-  if (!spiChip) {
-    spiChip = new SimSPIChip();
-  }
+void SimSPI::addSPIDevice(std::shared_ptr<SPIChip> device) {
+  _devices.push_back(device);
 }
 
-void SimSPI::end() {
-  if (spiChip) {
-    delete spiChip;
-    spiChip = NULL;
+std::shared_ptr<SPIChip> SimSPI::getActiveSPIChip() {
+  for (std::shared_ptr<SPIChip> device : _devices) {
+    if (digitalRead(device->getChipSelect()) == LOW) {
+      return device;
+    }
   }
+  log_e(SysSPI, "no SPI device found!");
+  return 0;
+}
+
+int8_t SimSPI::pinSS() const {
+  return _ss;
 }
 
 SimSPI SPI;

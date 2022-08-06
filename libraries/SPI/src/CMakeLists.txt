@@ -1,2 +1,2 @@
 
-ADD_LIBRARY(SPI SPI.cpp)
+ADD_LIBRARY(SPI SPI.cpp SPIChip.cpp)

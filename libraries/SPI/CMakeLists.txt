@@ -1,3 +1,3 @@
 
 ADD_SUBDIRECTORY(src)
-#ADD_SUBDIRECTORY(examples)
+ADD_SUBDIRECTORY(examples)
