@@ -19,141 +19,112 @@
 
 #include "WiFi.h"
 
-
-WiFiClass::WiFiClass()
-{
+WiFiClass::WiFiClass() {
 }
 
-void WiFiClass::init()
-{
+void WiFiClass::init() {
 }
 
-int WiFiClass::begin(char* ssid)
-{
-   return 0;
+int WiFiClass::begin(char *ssid) {
+  return 0;
 }
 
-int WiFiClass::begin(char* ssid, uint8_t key_idx, const char *key)
-{
-   return 0;
+int WiFiClass::begin(char *ssid, uint8_t key_idx, const char *key) {
+  return 0;
 }
 
-int WiFiClass::begin(char* ssid, const char *passphrase)
-{
-    return 0;
+int WiFiClass::begin(char *ssid, const char *passphrase) {
+  return 0;
 }
 
-void WiFiClass::config(IPAddress local_ip)
-{
+void WiFiClass::config(IPAddress local_ip) {
 }
 
-void WiFiClass::config(IPAddress local_ip, IPAddress dns_server)
-{
+void WiFiClass::config(IPAddress local_ip, IPAddress dns_server) {
 }
 
-void WiFiClass::config(IPAddress local_ip, IPAddress dns_server, IPAddress gateway)
-{
+void WiFiClass::config(IPAddress local_ip, IPAddress dns_server, IPAddress gateway) {
 }
 
-void WiFiClass::config(IPAddress local_ip, IPAddress dns_server, IPAddress gateway, IPAddress subnet)
-{
+void WiFiClass::config(IPAddress local_ip, IPAddress dns_server, IPAddress gateway, IPAddress subnet) {
 }
 
-void WiFiClass::setDNS(IPAddress dns_server1)
-{
+void WiFiClass::setDNS(IPAddress dns_server1) {
 }
 
-void WiFiClass::setDNS(IPAddress dns_server1, IPAddress dns_server2)
-{
+void WiFiClass::setDNS(IPAddress dns_server1, IPAddress dns_server2) {
 }
 
-int WiFiClass::disconnect()
-{
-	notImplemented("disconnect");
-    return 0;
+int WiFiClass::disconnect() {
+  notImplemented("disconnect");
+  return 0;
 }
 
-uint8_t* WiFiClass::macAddress(uint8_t* mac)
-{
-	//uint8_t* _mac = WiFiDrv::getMacAddress();
-	//memcpy(mac, _mac, WL_MAC_ADDR_LENGTH);
-	notImplemented("macAddress");
-    return (uint8_t *) "";
-}
-   
-IPAddress WiFiClass::localIP()
-{
-	IPAddress ret;
-	return ret;
+uint8_t *WiFiClass::macAddress(uint8_t *mac) {
+  // uint8_t* _mac = WiFiDrv::getMacAddress();
+  // memcpy(mac, _mac, WL_MAC_ADDR_LENGTH);
+  notImplemented("macAddress");
+  return (uint8_t *)"";
 }
 
-IPAddress WiFiClass::subnetMask()
-{
-	IPAddress ret;
-	return ret;
+IPAddress WiFiClass::localIP() {
+  IPAddress ret;
+  return ret;
 }
 
-IPAddress WiFiClass::gatewayIP()
-{
-	IPAddress ret;
-	return ret;
+IPAddress WiFiClass::subnetMask() {
+  IPAddress ret;
+  return ret;
 }
 
-char* WiFiClass::SSID()
-{
-    return "";
+IPAddress WiFiClass::gatewayIP() {
+  IPAddress ret;
+  return ret;
 }
 
-uint8_t* WiFiClass::BSSID(uint8_t* bssid)
-{
-    return (uint8_t *) "";
+char *WiFiClass::SSID() {
+  return "";
 }
 
-int32_t WiFiClass::RSSI()
-{
-    return 0;
+uint8_t *WiFiClass::BSSID(uint8_t *bssid) {
+  return (uint8_t *)"";
 }
 
-uint8_t WiFiClass::encryptionType()
-{
-    return 0;
+int32_t WiFiClass::RSSI() {
+  return 0;
 }
 
-
-int8_t WiFiClass::scanNetworks()
-{
-	return 0;
+uint8_t WiFiClass::encryptionType() {
+  return 0;
 }
 
-char* WiFiClass::SSID(uint8_t networkItem)
-{
-	return "";
+int8_t WiFiClass::scanNetworks() {
+  return 0;
 }
 
-int32_t WiFiClass::RSSI(uint8_t networkItem)
-{
-	return 0;
+char *WiFiClass::SSID(uint8_t networkItem) {
+  return "";
 }
 
-uint8_t WiFiClass::encryptionType(uint8_t networkItem)
-{
-    return 0;
+int32_t WiFiClass::RSSI(uint8_t networkItem) {
+  return 0;
 }
 
-uint8_t WiFiClass::status()
-{
-    return 0;
+uint8_t WiFiClass::encryptionType(uint8_t networkItem) {
+  return 0;
 }
 
+uint8_t WiFiClass::status() {
+  return 0;
+}
 
 bool WiFiClass::isConnected() {
-    return true;
+  return true;
 }
 
-int WiFiClass::hostByName(const char* aHostname, IPAddress& aResult)
-{
-	notImplemented("hostByName");
-	return 0;
+int WiFiClass::hostByName(const char *aHostname, IPAddress &aResult) {
+  notImplemented("hostByName");
+  return 0;
 }
 
 WiFiClass WiFi;

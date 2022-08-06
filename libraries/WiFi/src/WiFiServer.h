@@ -27,17 +27,17 @@ class WiFiClient;
 class WiFiServer : public Server {
 private:
   uint16_t _port;
-  int psock = 0;
+  int      psock = 0;
 
 public:
   WiFiServer(uint16_t);
   ~WiFiServer();
 
-  WiFiClient available(uint8_t *status = NULL);
-  void begin();
+  WiFiClient     available(uint8_t *status = NULL);
+  void           begin();
   virtual size_t write(uint8_t);
   virtual size_t write(const uint8_t *buf, size_t size);
-  uint8_t status();
+  uint8_t        status();
 
   using Print::write;
 };

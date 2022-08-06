@@ -32,9 +32,9 @@ extern "C" {
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <netdb.h>
 #include <sys/socket.h>
 #include <unistd.h>
-#include <netdb.h>
 
 WiFiClient::WiFiClient(int sock) : psock(sock) {
   if (psock) {
@@ -64,7 +64,7 @@ int WiFiClient::connect(const char *host, uint16_t port) {
   server.sin_addr = *((struct in_addr *)dns->h_addr);
   // server.sin_addr.s_addr = inet_addr(host);
   server.sin_family = AF_INET;
-  server.sin_port = htons(port);
+  server.sin_port   = htons(port);
 
   // Connect to remote server
   if (::connect(sock, (struct sockaddr *)&server, sizeof(server)) < 0) {
@@ -72,7 +72,7 @@ int WiFiClient::connect(const char *host, uint16_t port) {
     return false;
   }
 
-  psock = sock;
+  psock     = sock;
   errorCode = 0;
 
   // turn on nonblock
@@ -87,7 +87,9 @@ int WiFiClient::connect(IPAddress ip, uint16_t port) {
   return false;
 }
 
-size_t WiFiClient::write(uint8_t b) { return write(&b, 1); }
+size_t WiFiClient::write(uint8_t b) {
+  return write(&b, 1);
+}
 
 size_t WiFiClient::write(const uint8_t *buf, size_t size) {
   if (!psock) {
@@ -101,8 +103,7 @@ size_t WiFiClient::write(const uint8_t *buf, size_t size) {
 
   // return ::write(psock, buf, size);
   int res = ::send(psock, buf, size, MSG_NOSIGNAL);
-  if (res ==
-      -1) { // Better than write because, we dont want to receive bogus SIGPIPE signals for dropped connections
+  if (res == -1) { // Better than write because, we dont want to receive bogus SIGPIPE signals for dropped connections
     setWriteError();
     return 0;
   }
@@ -112,7 +113,7 @@ int WiFiClient::available() {
   if (psock) {
     if (ready == -1) { // No char already read, ask the OS
       uint8_t b;
-      int numread = ::read(psock, &b, 1);
+      int     numread = ::read(psock, &b, 1);
       if (numread < 1) {
         errorCode = errno;
         // EAGAIN means timeout
@@ -139,14 +140,14 @@ int WiFiClient::read() {
   if (!available())
     return -1;
 
-  b = ready;
+  b     = ready;
   ready = -1; // consumed
   return (uint8_t)b;
 }
 
 int WiFiClient::read(uint8_t *buf, size_t size) {
   assert(psock);
-  auto r = ::read(psock, buf, size);
+  auto r    = ::read(psock, buf, size);
   errorCode = errno;
 
   return r;
@@ -189,4 +190,6 @@ uint8_t WiFiClient::status() {
   }
 }
 
-WiFiClient::operator bool() { return connected(); }
+WiFiClient::operator bool() {
+  return connected();
+}
