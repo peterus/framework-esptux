@@ -1,3 +1,3 @@
 
 ADD_EXECUTABLE(WireScan WireScan.cpp tux.cpp)
-TARGET_LINK_LIBRARIES(WireScan ESPtux Wire)
+TARGET_LINK_LIBRARIES(WireScan Wire ESPtux)

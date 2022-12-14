@@ -1,0 +1,3 @@
+
+ADD_EXECUTABLE(WiFiScan WiFiScan.cpp tux.cpp)
+TARGET_LINK_LIBRARIES(WiFiScan WiFi ESPtux)

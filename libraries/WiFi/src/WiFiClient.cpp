@@ -17,11 +17,9 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#include "Utility.h"
 extern "C" {
 #include "string.h"
-#include "utility/debug.h"
-#include "utility/wifi_spi.h"
-#include "utility/wl_definitions.h"
 }
 
 #include "WiFi.h"
@@ -45,30 +43,28 @@ WiFiClient::WiFiClient(int sock) : psock(sock) {
 }
 
 int WiFiClient::connect(const char *host, uint16_t port) {
-  int socket_desc;
-
-  struct hostent *dns = gethostbyname(host);
+  hostent *dns = gethostbyname2(host, AF_INET);
   if (!dns) {
-    ::printf("WiFiClient: Hostname lookup failed %s\n", host);
+    log_e(LogSystem::SysWifi, "Hostname lookup failed: %s", host);
     return false;
   }
 
   // Create socket
   int sock = socket(AF_INET, SOCK_STREAM, 0);
   if (sock == -1) {
-    ::printf("WiFiClient: Could not create socket\n");
+    log_e(LogSystem::SysWifi, "Could not create socket");
     return false;
   }
 
-  struct sockaddr_in server;
-  server.sin_addr = *((struct in_addr *)dns->h_addr);
+  sockaddr_in server;
+  server.sin_addr = *((in_addr *)dns->h_addr);
   // server.sin_addr.s_addr = inet_addr(host);
   server.sin_family = AF_INET;
   server.sin_port   = htons(port);
 
   // Connect to remote server
-  if (::connect(sock, (struct sockaddr *)&server, sizeof(server)) < 0) {
-    ::printf("WiFiClient: connect error\n");
+  if (::connect(sock, (sockaddr *)&server, sizeof(server)) < 0) {
+    log_e(LogSystem::SysWifi, "connect error");
     return false;
   }
 
@@ -83,6 +79,8 @@ int WiFiClient::connect(const char *host, uint16_t port) {
 }
 
 int WiFiClient::connect(IPAddress ip, uint16_t port) {
+  UNUSED(ip);
+  UNUSED(port);
   notImplemented("WiFiClient::connect-ipaddr");
   return false;
 }
@@ -107,6 +105,7 @@ size_t WiFiClient::write(const uint8_t *buf, size_t size) {
     setWriteError();
     return 0;
   }
+  return 0;
 }
 
 int WiFiClient::available() {
@@ -179,14 +178,6 @@ uint8_t WiFiClient::connected() {
     return 0;
   } else {
     return errorCode == 0;
-  }
-}
-
-uint8_t WiFiClient::status() {
-  if (!psock) {
-    return CLOSED;
-  } else {
-    return ESTABLISHED;
   }
 }
 

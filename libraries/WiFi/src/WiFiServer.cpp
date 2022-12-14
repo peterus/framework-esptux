@@ -17,13 +17,12 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#include "Utility.h"
 #include <string.h>
 
-extern "C" {
 #include "logging.h"
-#include "utility/debug.h"
-#include "utility/wifi_spi.h"
-}
+
+#include "util.h"
 
 #include "WiFi.h"
 #include "WiFiClient.h"
@@ -80,9 +79,10 @@ void WiFiServer::begin() {
 }
 
 WiFiClient WiFiServer::available(byte *status) {
+  UNUSED(status);
 
   assert(psock);
-  log(SysWifi, LogVerbose, "calling accept");
+  log(SysWifi, LogDebug, "calling accept");
 
   struct sockaddr_in cli_addr;
   socklen_t          clilen = sizeof(cli_addr);
@@ -97,7 +97,7 @@ WiFiClient WiFiServer::available(byte *status) {
     }
   }
 
-  log(SysWifi, LogVerbose, "accept=%d", s);
+  log(SysWifi, LogDebug, "accept=%d", s);
 
   return WiFiClient(s);
 }
@@ -108,14 +108,15 @@ uint8_t WiFiServer::status() {
 }
 
 size_t WiFiServer::write(uint8_t b) {
+  UNUSED(b);
   notImplemented("WiFiServer::write");
   return 0;
 }
 
 size_t WiFiServer::write(const uint8_t *buffer, size_t size) {
-  size_t n = 0;
-
+  UNUSED(buffer);
+  UNUSED(size);
   notImplemented("WiFiServer::writen");
   debug();
-  return n;
+  return 0;
 }
